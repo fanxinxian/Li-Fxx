@@ -2,17 +2,74 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login'
-
+//试题管理
+import Addtext from '../views/text/addtext.vue'
+import Classify from '../views/text/classify.vue'
+import Look from '../views/text/look.vue'
+//用户管理
+import Adduser from '../views/user/adduser.vue'
+import Show from '../views/user/show.vue'
+//考试管理
+import Addexam from '../views/exam/addexam.vue'
+import List from '../views/exam/list.vue'
+//班级管理
+import Grade from '../views/grade/grade.vue'
+import Room from '../views/grade/room.vue'
+import Student from '../views/grade/student.vue'
+//阅卷管理
+import Await from '../views/papers/await.vue'
 Vue.use(VueRouter)
 
 const routes = [
     {
+        path:'/',
+        redirect:'/home'
+    },
+    {
         path:'/home',
-        component:Home
+        component:Home,
+        children:[
+            {
+                path:'/home/addtext',
+                component:Addtext
+            }, {
+                path:'/home/classify',
+                component:Classify
+            }, {
+                path:'/home/look',
+                component:Look
+            }, {
+                path:'/home/adduser',
+                component:Adduser
+            }, {
+                path:'/home/show',
+                component:Show
+            }, {
+                path:'/home/addexam',
+                component:Addexam
+            }, {
+                path:'/home/list',
+                component:List
+            }, {
+                path:'/home/grade',
+                component:Grade
+            }, {
+                path:'/home/room',
+                component:Room
+            }, {
+                path:'/home/student',
+                component:Student
+            }, {
+                path:'/home/await',
+                component:Await
+            }
+        ]
     }, {
         path:'/login',
         component:Login
     }
+    
+    
 ]
 
 const router = new VueRouter({
