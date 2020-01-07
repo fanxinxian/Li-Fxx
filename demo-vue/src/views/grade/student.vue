@@ -43,7 +43,6 @@
             </el-table-column>
         </el-table>
     <div class="block">
-        <span class="demonstration">完整功能</span>
     <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -100,12 +99,12 @@ export default {
 <style scoped lang="scss">
 .el-input{
     width: 190px;
-    height:35px !important;
+    height:35px ;
     margin:0 20px;
 }
 .el-option{
     width: 170px;
-    height:35px !important;
+    height:35px ;
     margin-right:25px;
 }
 .el-button{

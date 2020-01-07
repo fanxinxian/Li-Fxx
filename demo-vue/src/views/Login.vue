@@ -44,9 +44,6 @@ export default {
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else {
-                if (this.ruleForm.checkPass !== '') {
-                    this.$refs.ruleForm.validateField('checkPass');
-                }
                 callback();
             }
         };
@@ -69,44 +66,19 @@ export default {
     },
     computed: {},
     methods: {
+        ...mapActions('Login', ['getList']), 
         submitForm(formName) {
             let {name, pass} = this.ruleForm;
+            console.log(name, pass);
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-<<<<<<< HEAD
-                    console.log(this.ruleForm);
-                    axios.post('/api/user/login', {user_name:name, user_pwd:checkPass }).then(res =>{
-                        console.log(res, 'res');
-                        if(res.data.code === 1){
-                            Message({
-                                message:res.data.msg,
-                                type:"success",
-                                duration:1000
-                            })
-                            localStorage.setItem('token', res.data.token);
-<<<<<<< HEAD
-                            this.$router.push('/home');
-=======
-                            this.$router.push('/home')
->>>>>>> 66bc5c1489144a574de4aeed6f6163265be14766
-                        }else{
-                            Message({
-                                message:res.data.msg,
-                                type:"error",
-                                duration:1000
-                            })
-                        }
-                    })
-=======
-                    this.getList(name, pass);
->>>>>>> fxx
+                    this.getList({name, pass});
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
-        ...mapActions(['getList'])
     },
     created() {},
     mounted() {}
@@ -122,25 +94,12 @@ export default {
   opacity: 0.9;
 }
 .login-box{
-<<<<<<< HEAD
     width: 400px;
     height: 400px;
     top: 100px;
-    left:80px;
-=======
-    width: 380px;
-    height: 420px;
-    top: 120px;
-    right:200px;
->>>>>>> fxx
+    right:120px;
     position: absolute;
-<<<<<<< HEAD
     border-radius: 5px;
-=======
-    opacity: 0.85;
-    border-radius: 10px;
-    border: 3px solid rgba(157, 255, 0, 0.55);
->>>>>>> 66bc5c1489144a574de4aeed6f6163265be14766
     background-color: #fff;
     h3{
         text-align: center;

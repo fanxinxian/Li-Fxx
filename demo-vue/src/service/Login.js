@@ -13,8 +13,9 @@ const Login = {
         
     },
     actions: {
-        getList(user_name, user_pwd){
-            axios.post('/api/user/login', {user_name, user_pwd }).then(res =>{
+        getList(state, {name, pass}){
+            console.log( {name, pass})
+            axios.post('/api/user/login', {user_name:name, user_pwd:pass }).then(res =>{
                 if(res.data.code === 1){
                     Message({
                         message:res.data.msg,
@@ -22,7 +23,7 @@ const Login = {
                         duration:5000
                     })
                     cookie.set('token', res.data.token);
-                    this.$router.push('/home');
+                    location.href = '/home'
                 }else{
                     Message({
                         message:res.data.msg,
