@@ -1,23 +1,24 @@
 <template>
-    <div class="room">
+    <div class="grade">
         <el-container>
     <el-header>
         <h2>教室管理</h2>
     </el-header>
     <el-main>
+        <el-button type="primary" icon="el-icon-plus">添加教室</el-button>
         <el-table
     :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="班级名"
-      width="220">
+      label="教室号"
+      width="600">
     </el-table-column>
 
     <el-table-column
       fixed="right"
       label="操作"
-      width="300">
+      width="260">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
@@ -94,7 +95,7 @@ export default {
 </script>
 <style scoped lang="scss">
  .el-header{
-    color: #333;
+    background: #EAEEF3;
     text-align: center;
     line-height: 60px;
     h2{
