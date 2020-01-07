@@ -9,9 +9,6 @@
             <el-form-item  prop="pass" style="margin-left:-100px">
                 <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item  prop="checkPass" style="margin-left:-100px">
-                <el-input type="password" v-model="ruleForm.checkPass" placeholder="再次输入密码" autocomplete="off"></el-input>
-            </el-form-item>
             <el-form-item >
                 <el-button type="primary"  class="el-button"  @click="submitForm('ruleForm')">登录</el-button>
             </el-form-item>
@@ -22,8 +19,7 @@
   </div>
 </template>
 <script>
-import { Message } from 'element-ui';
-import axios from '../config/request'
+import {mapActions} from 'vuex'
 export default {
     props: {},
     components: {},
@@ -54,15 +50,6 @@ export default {
                 callback();
             }
         };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm.pass) {
-                callback(new Error('两次输入密码不一致!'));
-            } else {
-                callback();
-            }
-        };
         return {
             checked:'',
             ruleForm: {
@@ -74,9 +61,6 @@ export default {
                 pass: [
                     { validator: validatePass, trigger: 'blur' }
                 ],
-                checkPass: [
-                    { validator: validatePass2, trigger: 'blur' }
-                ],
                 name: [
                     { validator: checkAge, trigger: 'blur' }
                 ]
@@ -86,34 +70,17 @@ export default {
     computed: {},
     methods: {
         submitForm(formName) {
-            let {name, checkPass} = this.ruleForm;
+            let {name, pass} = this.ruleForm;
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    console.log(this.ruleForm);
-                    axios.post('/api/user/login', {user_name:name, user_pwd:checkPass }).then(res =>{
-                        console.log(res, 'res');
-                        if(res.data.code === 1){
-                            Message({
-                                message:res.data.msg,
-                                type:"success",
-                                duration:5000
-                            })
-                            localStorage.setItem('token', res.data.token);
-                            this.$router.push('/home');
-                        }else{
-                            Message({
-                                message:res.data.msg,
-                                type:"error",
-                                duration:5000
-                            })
-                        }
-                    })
+                    this.getList(name, pass);
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
+        ...mapActions(['getList'])
     },
     created() {},
     mounted() {}
@@ -128,10 +95,10 @@ export default {
   background-size: 100%;
 }
 .login-box{
-    width: 400px;
-    height: 450px;
-    top: 100px;
-    left:200px;
+    width: 380px;
+    height: 420px;
+    top: 120px;
+    right:200px;
     position: absolute;
     border-radius: 5px;
     background-color: #fff;
@@ -143,13 +110,12 @@ export default {
 .el-input{
     width: 88%;
     height: 25px;
-    margin:4% 6%;
-    // border-radius: 6px;
-    // border:1px solid #dddddd;
+    margin:4% 4%;
 }
 .el-button{
     width: 250px;
-    margin-left:-25px;
+    margin-left:-30px;
+    margin-bottom: 20px;
 }
 .el-checkbox{
     margin:0 0 0 30px;
@@ -159,7 +125,7 @@ export default {
     margin-left:200px;
 }
 .el-form-item__error{
-    left:30px;
+    left:30px !important;
     position: absolute;
 }
 </style>
