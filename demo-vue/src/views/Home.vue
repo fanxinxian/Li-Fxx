@@ -14,7 +14,7 @@
           <el-dropdown-item>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>李江</span>
+      <span>范新贤</span>
     </el-header>
   <el-container>
     <el-aside width="200px">
@@ -169,9 +169,7 @@ export default {
 
 
   .el-main {
-    background-color: #E9EEF3;
-    text-align: center;
-    line-height: 160px;
+    background-color: #f0f2f5;
   }
   .el-container{
       height: 100%;

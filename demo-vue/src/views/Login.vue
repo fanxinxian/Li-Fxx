@@ -23,21 +23,21 @@
 </template>
 <script>
 import { Message } from 'element-ui';
-import axios from 'axios'
+import axios from '../config/request'
 export default {
     props: {},
     components: {},
     data() {
         var checkAge = (rule, value, callback) => {
             if (!value) {
-                return callback(new Error('年龄不能为空'));
+                return callback(new Error('用户名不能为空'));
             }
             setTimeout(() => {
                 if (Number.isInteger(value)) {
                     callback(new Error('请输入数字值'));
                 } else {
-                    if (value < 18) {
-                        callback(new Error('必须年满18岁'));
+                    if (typeof value === String ) {
+                        callback(new Error('必须是字符串类型'));
                     } else {
                         callback();
                     }
@@ -86,10 +86,11 @@ export default {
     computed: {},
     methods: {
         submitForm(formName) {
+            let {name, checkPass} = this.ruleForm;
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     console.log(this.ruleForm);
-                    axios.post('/api/user/login', {user_name:this.ruleForm.name, user_pwd:this.ruleForm.pass }).then(res =>{
+                    axios.post('/api/user/login', {user_name:name, user_pwd:checkPass }).then(res =>{
                         console.log(res, 'res');
                         if(res.data.code === 1){
                             Message({
@@ -98,6 +99,7 @@ export default {
                                 duration:5000
                             })
                             localStorage.setItem('token', res.data.token);
+                            this.$router.push('/home');
                         }else{
                             Message({
                                 message:res.data.msg,
@@ -131,6 +133,7 @@ export default {
     top: 100px;
     left:200px;
     position: absolute;
+    border-radius: 5px;
     background-color: #fff;
     h3{
         text-align: center;
