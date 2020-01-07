@@ -6,15 +6,17 @@
           <img src="/1.jpg" alt="">
       </el-header>
       <el-dropdown class="head-right" style="text-align: right;">
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <i class="el-icon-setting" style="margin-right:50px;font-size:25px;line-height:60px"></i>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
           <el-dropdown-item>我的班级</el-dropdown-item>
           <el-dropdown-item>设置</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+            <router-link to="/login">
+            <el-dropdown-item>退出登录</el-dropdown-item>
+            </router-link>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>李江</span>
+      <span style="margin-right:50px;">李江</span>
     </el-header>
   <el-container>
     <el-aside width="200px">
@@ -120,10 +122,10 @@ export default {
 
     },
     methods:{
-
+        
     },
     created(){
-
+      
     },
     mounted(){
 

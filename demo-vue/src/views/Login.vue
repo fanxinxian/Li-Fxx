@@ -95,14 +95,15 @@ export default {
                             Message({
                                 message:res.data.msg,
                                 type:"success",
-                                duration:5000
+                                duration:1000
                             })
                             localStorage.setItem('token', res.data.token);
+                            this.$router.push('/home')
                         }else{
                             Message({
                                 message:res.data.msg,
                                 type:"error",
-                                duration:5000
+                                duration:1000
                             })
                         }
                     })
@@ -122,15 +123,19 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  background: url("../img/u=1766048813,3019784974&fm=26&gp=0.jpg") no-repeat;
+  background: url("../img/8712338c7c51458fa356af8571bb6c3f.jpg") no-repeat;
   background-size: 100%;
+  opacity: 0.9;
 }
 .login-box{
     width: 400px;
-    height: 450px;
+    height: 400px;
     top: 100px;
-    left:200px;
+    left:80px;
     position: absolute;
+    opacity: 0.85;
+    border-radius: 10px;
+    border: 3px solid rgba(157, 255, 0, 0.55);
     background-color: #fff;
     h3{
         text-align: center;
