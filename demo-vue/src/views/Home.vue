@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="home">
 <el-container>
           <el-header class="head">
@@ -102,89 +103,317 @@
   </el-container>
 </el-container>
     </div>
+=======
+  <div class="home">
+    <el-container class="container">
+            <el-header class="header">
+                <div class="el-left">
+                    <img src="../../public/timg.jpeg" alt="">
+                </div>
+                <div class="el-right">
+                    <div class="user" >
+                       <div class="span">
+                         <span class="photo"></span>
+                        <span>欢迎</span>
+                       </div>
+                        <ul class="selectList">
+                            <li>个人中心</li>
+                            <li>我的班级</li>
+                            <hr style="border:0.5px solid #e3e3e3;">
+                            <li>设置</li>
+                            <li @click="bank">退出登录</li>
+                        </ul>
+                    </div>
+                </div>
+            </el-header>
+      <el-container class="main">
+        <el-aside width="200px">
+          <el-menu
+            default-active="2"
+            class="el-menu-vertical-demo"
+          >
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-document"></i>
+                <span>试题管理</span>
+              </template>
+              <el-menu-item-group>
+                  <router-link to="/home/addtext">
+                  <el-menu-item index="1-1"><span>添加试题</span></el-menu-item>
+                  </router-link>
+                  <router-link to="/home/classify">
+                  <el-menu-item index="1-2"><span>试题分类</span></el-menu-item>
+                  </router-link>
+                  <router-link to="/home/look">
+                  <el-menu-item index="1-3"><span>查看试题</span></el-menu-item>
+                  </router-link>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+          <el-menu
+            default-active="2"
+            class="el-menu-vertical-demo">
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-user-solid"></i>
+                <span>用户管理</span>
+              </template>
+              <el-menu-item-group>
+                  <router-link to="/home/adduser">
+                  <el-menu-item index="1-4"><span>添加用户</span></el-menu-item>
+                  </router-link>
+                  <router-link to="/home/show">
+                  <el-menu-item index="1-5"><span>用户展示</span></el-menu-item>
+                  </router-link>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+
+          <el-menu
+            default-active="3"
+            class="el-menu-vertical-demo" >
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-tickets"></i>
+                <span>考试管理</span>
+              </template>
+              <el-menu-item-group>
+                  <router-link to="/home/addexam">
+                  <el-menu-item index="1-6"><span>添加考试</span></el-menu-item>
+                  </router-link>
+                  <router-link to="/home/list">
+                  <el-menu-item index="1-7"><span>试卷列表</span></el-menu-item>
+                  </router-link>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+          <el-menu
+            default-active="4"
+            class="el-menu-vertical-demo">
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-s-order"></i>
+                <span>班级管理</span>
+              </template>
+              <el-menu-item-group>
+                  <router-link to="/home/grade">
+                  <el-menu-item index="1-8"><span>班级管理</span></el-menu-item>
+                  </router-link>
+                  <router-link to="/home/room">
+                  <el-menu-item index="1-9"><span>教室管理</span></el-menu-item>
+                  </router-link>
+                
+                  <router-link to="/home/student">
+                  <el-menu-item index="1-10"><span>学生管理</span></el-menu-item>
+                  </router-link>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+          <el-menu
+            default-active="5"
+            class="el-menu-vertical-demo">
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-star-on"></i>
+                <span>阅卷管理</span>
+              </template>
+              <el-menu-item-group>
+                  <router-link to="/home/await">
+                  <el-menu-item index="1-11"><span>待批班级</span></el-menu-item>
+                  </router-link>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+
+        </el-aside>
+        <el-main>
+          <div class="box">
+            <div>
+              {{$route.meta.title}}
+            </div>
+            <main>
+              <router-view></router-view>
+            </main>
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+>>>>>>> 66bc5c1489144a574de4aeed6f6163265be14766
 </template>
+
 <script>
 export default {
-    props:{
-
-    },
-    components:{
-
-    },
     data(){
-        
         return {
+            isactive:false
         }
     },
-    computed:{
-
-    },
     methods:{
-
-    },
-    created(){
-
-    },
-    mounted(){
-
+        bank(){
+            this.$router.push('/login')
+        },
+        click(){
+            this.style.background = "#000;"
+        }
     }
 }
 </script>
-<style scoped lang="scss">
+
+<style lang="scss">
 .home{
     width: 100%;
     height: 100%;
-    a{
-      text-decoration: none;
-    }
-}
-.head-left >img{
-    width: 144px;
-    height:60px;
-}
-.el-header, .el-footer {
-    background-color: #fff;
-    text-align: center;
-    line-height: 60px;
-  }
-  .head{
-      display: flex;
-  }
-  .head-left{
-      flex: 3;
-    //   text-align: center;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column；
+}
+.container{
+  display: flex;
+    flex-direction: column；
+}
+.main{
+  flex: 1;
+  overflow: auto;
+}
+ .el-header {
+    background-color: #fcfcfc;
+    color: #333;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    .el-left{
+        width: 70%;
+        height: 60px;
+        line-height:90px;
+        img{
+          width: 120px;
+          height: 30px;
+          margin-left: 50px;
+        }
+    }
+    .el-right{
+        width: 30%;
+        height: 60px;
+        display: flex;
+        .user{
+            width: 120px;
+            height: 60px;
+            margin: 0 auto;
+            display: flex;
+            .span{
+                width: 320px;
+                height: 60px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                .photo{
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 50%;
+                  background: #ccc;
+                }
+            }
+            .span:hover{
+              background: #eee;
+            }
+            
+        }
+        .user:hover .selectList{
+            display: block;
+        }
+        .selectList{
+            width: 118px;
+            height: 120px;
+            background: #fff;
+            position: fixed;
+            top: 60px;
+            right:12%;
+            font-size: 12px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            display: none;
+            z-index: 999;
+            li{
+                width: 100%;
+                height: 30%;
+                text-align: center;
+                line-height: 40px;
+                cursor: pointer;
+                z-index: 999;
+            }
+            li:hover{
+                background: #eee;
+            }
+        }
+    }
   }
-  .head-right{
-      flex: 7;
-  }
-  .el-aside {
-    background-color: #242A3F;
-    text-align: center;
-    line-height: 200px;
 
-  }
-
-
+  
   .el-main {
+<<<<<<< HEAD
     background-color: #f0f2f5;
+=======
+    background-color: #E9EEF3;
+    color: #333;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+>>>>>>> 66bc5c1489144a574de4aeed6f6163265be14766
   }
-  .el-container{
+  .box{
+      width: 96%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      header{
+          width: 100%;
+          height: 80px;
+          line-height: 80px;
+          font-size:25px;
+      }
+      main{
+          flex:1;
+          width: 100%;
+          overflow: auto;
+          background: #fff;
+      }
   }
-  body > .el-container {
-    margin-bottom: 40px;
+.el-aside{
+  background: #242A3F;
+  color: #fff;
+  ul{
+    background: #242A3F;
+    color: #fff;
+    li{
+      background: #242A3F;
+      span{
+        color: #fff;
+      }
+    }
   }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
+  .el-submenu__title:hover{
+    background: #242A3F;
   }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
+  ul li:hover{
+    background: #242A3F;
   }
-
+    ul li:active{
+    background: #242A3F;
+  }
+  a{
+    text-decoration: none;
+  }
+}
+.el-menu-item{
+  background: #000;
+}
+.el-menu-item:active{
+  background: #000;
+}
+.click{
+  background: #000;
+}
 </style>
