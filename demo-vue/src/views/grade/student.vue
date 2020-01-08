@@ -7,7 +7,7 @@
                 <el-option class="el-option " v-for="(item,ind) in tableData" :key="ind" :label="item.room_text" value="shanghai"></el-option>
             </el-select>
             <el-select v-model="sizeForm.region"  size="small" placeholder="班级名" class="el-option">
-                <el-option v-for="(item,ind) in tableData" :key="ind" :label="item.grade_name"  value="shanghai"></el-option>
+                <el-option v-for="(item,ind) in tableData" :key="ind" :label="item.grade_name" value="shanghai"></el-option>
             </el-select>
             <el-button type="primary" size="small" class="el-button">搜索</el-button>
             <el-button type="primary" size="small" class="el-button">重置</el-button>
@@ -97,6 +97,11 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.student{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 .el-input{
     width: 190px;
     height:35px ;

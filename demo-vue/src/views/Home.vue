@@ -126,9 +126,7 @@
             <div>
               {{$route.meta.title}}
             </div>
-            <main>
               <router-view></router-view>
-            </main>
           </div>
         </el-main>
       </el-container>
@@ -216,8 +214,8 @@ export default {
             display: block;
         }
         .selectList{
-            width: 118px;
-            height: 120px;
+            width: 120px;
+            height: 140px;
             background: #fff;
             position: fixed;
             top: 60px;
@@ -228,16 +226,17 @@ export default {
             flex-direction: column;
             display: none;
             z-index: 999;
+            border: 0.5px solid #ccc;
             li{
                 width: 100%;
-                height: 30%;
+                height: 25%;
                 text-align: center;
-                line-height: 40px;
+                line-height: 30px;
                 cursor: pointer;
                 z-index: 999;
             }
             li:hover{
-                background: #eee;
+                background: rgba(182, 227, 244, 0.611);
             }
         }
     }
@@ -253,7 +252,7 @@ export default {
     flex-direction: column;
   }
   .box{
-      width: 96%;
+      width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -264,12 +263,7 @@ export default {
           line-height: 80px;
           font-size:25px;
       }
-      main{
-          flex:1;
-          width: 100%;
-          overflow: auto;
-          background: #fff;
-      }
+
   }
 .el-aside{
   background: #242A3F;
