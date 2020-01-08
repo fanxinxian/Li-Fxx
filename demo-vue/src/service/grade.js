@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../uitl/request'
 const card = {
     /**
      * 定义命名空间，防止多个模块同名共享，使用时需要带上命名空间
@@ -15,7 +15,6 @@ const card = {
     actions: {
         addCardFun({commit}){
             axios.get('/api/manger/grade').then(({data})=>{
-                console.log(data, 'update')
                 commit("addCard", data.data)
             })
         },

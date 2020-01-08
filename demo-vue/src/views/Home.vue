@@ -268,7 +268,6 @@ export default {
           flex:1;
           width: 100%;
           overflow: auto;
-          background: #fff;
       }
   }
 .el-aside{

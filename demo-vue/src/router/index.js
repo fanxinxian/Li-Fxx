@@ -18,6 +18,13 @@ import Room from '../views/grade/room.vue'
 import Student from '../views/grade/student.vue'
 //阅卷管理
 import Await from '../views/papers/await.vue'
+//用户管理
+import UserList from '../views/user/children/userlist'
+import Relation from '../views/user/children/relation'
+import Permissions from '../views/user/children/permissions'
+import Jurisdiction from '../views/user/children/jurisdiction'
+import Identity from '../views/user/children/identity'
+import Prot from '../views/user/children/port'
 Vue.use(VueRouter)
 
 const routes = [
@@ -40,10 +47,35 @@ const routes = [
                 component:Look
             }, {
                 path:'/home/adduser',
-                component:Adduser
+                component:Adduser,
             }, {
                 path:'/home/show',
-                component:Show
+                component:Show,
+                children:[
+                    {
+                        path:'/home/show',
+                        redirect:'/home/adduser/userlist'
+                    }, 
+                    {
+                        path:'/home/adduser/userlist',
+                        component: UserList
+                    }, {
+                        path:'/home/adduser/relation',
+                        component:Relation
+                    }, {
+                        path:'/home/adduser/jurisdiction',
+                        component:Jurisdiction
+                    }, {
+                        path:"/home/adduser/Identity",
+                        component:Identity
+                    }, {
+                        path:'/home/adduser/permissions',
+                        component:Permissions
+                    }, {
+                        path:'/home/adduser/prot',
+                        component:Prot
+                    }
+                ]
             }, {
                 path:'/home/addexam',
                 component:Addexam

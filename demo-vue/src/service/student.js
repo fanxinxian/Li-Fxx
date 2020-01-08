@@ -5,15 +5,19 @@ const student = {
      */
     namespaced: true,
     state: {
-        tableData:[],
-        total:20,
-        eiemt:1,
-        sum:0
+        tabList:[],
+        list:[],
+        count:1,
+        start:0,
+        emit:10,
     },
     mutations: {
         setList(state, obj){
-            state.tableData = obj;
-            state.sum = Math.ceil(state.tableData.length / state.total)
+            state.tabList = obj;
+            state.list = state.tabList.slice(state.start = (state.count - 1) * state.emit, state.emit);
+        },
+        btnSecah(state, data){
+            state.list = state.tabList.filter(item=>item.student_name === data);
         }
     },
     actions: {

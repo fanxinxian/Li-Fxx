@@ -4,7 +4,7 @@ import Router from '../router/index';
 import Cookie from 'js-cookie';
 import { Message } from 'element-ui';
 let instance = axios.create();
-instance.defaults.timeout = 5000;
+instance.defaults.timeout = 3000;
 // if (process.env.NODE_ENV === 'development') {
 //     instance.defaults.baseURL = '/dev'
 // } else if (process.env.NODE_ENV === 'test') {
@@ -15,7 +15,6 @@ instance.defaults.timeout = 5000;
 instance.interceptors.request.use(function (config) {
     if(config.url !== '/api/user/login'){
         let token = Cookie.get('token');
-        console.log(token);
         if (!token) {
             Router.replace('/login')
         }
@@ -33,7 +32,7 @@ instance.interceptors.response.use(function (response) {
     Message({
         message: title,
         type: 'success',
-        duration: 5000
+        duration: 3000
     })
     return Promise.reject(error);
 });
