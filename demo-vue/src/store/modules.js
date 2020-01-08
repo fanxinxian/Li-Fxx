@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
 import Grade from '../service/grade'
+import Room from '../service/room'
 import student from '../service/student'
 import Login from '../service/Login'
-import UserList from '../service/user'
+import Classify from '../service/classify'
+import Look from '../service/look'
+import List from '../service/list'
+import Addexam from '../service/addexam'
 Vue.use(Vuex);
 //构造store
 const store = new Vuex.Store({
@@ -11,7 +15,11 @@ const store = new Vuex.Store({
         student,
         Login,
         Grade,
-        UserList
+        Room,
+        Classify,
+        Look,
+        List,
+        Addexam
     }
 })
 

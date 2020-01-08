@@ -7,7 +7,11 @@
                 <el-option class="el-option " v-for="(item,ind) in tabList" :key="ind" :label="item.room_text" value="shanghai"></el-option>
             </el-select>
             <el-select v-model="sizeForm.region"  size="small" placeholder="班级名" class="el-option">
+<<<<<<< HEAD
                 <el-option v-for="(item,ind) in tabList" :key="ind" :label="item.grade_name"  value="shanghai"></el-option>
+=======
+                <el-option v-for="(item,ind) in tableData" :key="ind" :label="item.grade_name" value="shanghai"></el-option>
+>>>>>>> lj
             </el-select>
             <el-button type="primary" size="small" class="el-button" @click="btnSecah(sizeForm.name)">搜索</el-button>
             <el-button type="primary" size="small" class="el-button" @click="btnReset">重置</el-button>

@@ -20,7 +20,7 @@ const Login = {
                     Message({
                         message:res.data.msg,
                         type:"success",
-                        duration:5000
+                        duration:1000
                     })
                     cookie.set('token', res.data.token);
                     location.href = '/home'
@@ -28,7 +28,7 @@ const Login = {
                     Message({
                         message:res.data.msg,
                         type:"error",
-                        duration:5000
+                        duration:1000
                     })
                 }
             })
