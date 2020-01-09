@@ -8,6 +8,7 @@
         <div class="maintop-1">
   <ul class="ul">
       <span style="font-size:14px">课程类型:</span>
+      <span style="font-size:12px;margin:0 -30px 0 20px" class="all" @click="all">All</span>
       <div class="li">
           <li v-for="(item,index) in cardArr" :key="index">
           {{item.subject_text}}
@@ -28,7 +29,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
+                <el-button type="primary" @click="onSubmit" icon="el-icon-search" style="background:#00f;">查询</el-button>
             </el-form-item>
 </el-form>
         </div>
@@ -43,7 +44,7 @@
                             <el-tag type="info">{{item.subject_text}}</el-tag>
                             <el-tag type="warning">{{item.exam_name}}</el-tag>
                         </div>
-                        <span style="color:#00f;font-size:14px">这是我发布的</span>
+                        <span style="color:#00f;font-size:14px">{{item.user_name}}发布</span>
                     </div>
                 <div class="li-right">
                     <a href="">编辑</a>
@@ -95,6 +96,9 @@ export default {
         },
         deleteRow(index, rows) {
             rows.splice(index, 1);
+        },
+        all(){
+            this.nextSbiling.style.background = '#00f'
         }
     },
     created(){
@@ -129,7 +133,7 @@ export default {
 .maintop-1{
     width: 100%;
     height: 100px;
-    line-height: 40px;
+    line-height: 80px;
     .ul{
         display: flex;
         span{
@@ -143,7 +147,11 @@ export default {
         justify-content: space-around;
         align-items: center;
         font-size: 12px;
+        cursor: pointer;
     }
+}
+.all{
+    cursor: pointer;
 }
 .main-bottom{
     width: 100%;

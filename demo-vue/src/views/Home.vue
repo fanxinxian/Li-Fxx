@@ -278,6 +278,10 @@ export default {
       }
     }
   }
+  li:hover{
+    font-size: 13px;
+    transform: 0.1;
+  }
 }
 
 </style>

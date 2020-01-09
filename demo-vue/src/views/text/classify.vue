@@ -6,15 +6,11 @@
     </el-header>
     <el-main>
         <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加类型</el-button>
-
 <el-dialog title="创建新类型" :visible.sync="dialogFormVisible" class="dialog">
-  <el-form :model="form">
-    <el-form-item>
-      <el-input v-model="form.name" autocomplete="off" placeholder="请输入类型名称"></el-input>
-    </el-form-item>
-  </el-form>
-  <div slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-input v-model="text" placeholder="请输入用户名"></el-input>
+        <div slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="sure">确 定</el-button>
+    <!-- {text, dialogFormVisible} -->
     <el-button @click="dialogFormVisible = false">取 消</el-button>
   </div>
 </el-dialog>
@@ -24,17 +20,17 @@
     <el-table-column
       prop="questions_type_id"
       label="类型ID"
-      width="350">
+      width="500">
     </el-table-column>
     <el-table-column
       prop="questions_type_text"
       label="类型名称"
-      width="300">
+      width="500">
     </el-table-column>
     <el-table-column
       fixed="right"
       label="操作"
-      width="260">
+      width="100">
       <!-- <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
       </template> -->
@@ -45,7 +41,7 @@
     </div>
 </template>
 <script>
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
     props:{
 
@@ -68,12 +64,14 @@ export default {
                 resource: '',
                 desc: ''
             },
+            text:'',
             formLabelWidth: '120px'
         };
     },
     computed:{
         ...mapState('Classify', [
-            'cardArr'
+            'cardArr',
+            // 'dialogFormVisible'
         ])
     },
     methods:{
@@ -81,8 +79,16 @@ export default {
             console.log(row);
         },
         ...mapActions('Classify', [
-            'addCardFun'
-        ])
+            'addCardFun',
+        ]),
+        ...mapMutations('Classify', [
+            'addQuestionsFun',
+        ]),
+        sure(){
+            this.addQuestionsFun(this.text)
+            this.dialogFormVisible = false;
+            this.addCardFun()
+        }
     },
     created(){
         this.addCardFun()
