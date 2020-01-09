@@ -24,8 +24,9 @@
       <el-container class="main">
         <el-aside width="200px">
           <el-menu
-            default-active="2"
+            default-active="1"
             class="el-menu-vertical-demo"
+            background-color="#242A3F"
           >
             <el-submenu index="1">
               <template slot="title">
@@ -47,7 +48,8 @@
           </el-menu>
           <el-menu
             default-active="2"
-            class="el-menu-vertical-demo">
+            class="el-menu-vertical-demo"
+            background-color="#242A3F">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-user-solid"></i>
@@ -66,7 +68,8 @@
 
           <el-menu
             default-active="3"
-            class="el-menu-vertical-demo" >
+            class="el-menu-vertical-demo"
+            background-color="#242A3F">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-tickets"></i>
@@ -84,7 +87,8 @@
           </el-menu>
           <el-menu
             default-active="4"
-            class="el-menu-vertical-demo">
+            class="el-menu-vertical-demo"
+            background-color="#242A3F">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-s-order"></i>
@@ -106,7 +110,8 @@
           </el-menu>
           <el-menu
             default-active="5"
-            class="el-menu-vertical-demo">
+            class="el-menu-vertical-demo"
+            background-color="#242A3F">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-star-on"></i>
@@ -145,8 +150,8 @@ export default {
         bank(){
             this.$router.push('/login')
         },
-        click(){
-            this.style.background = "#000;"
+        button(){
+            this.style.background = '#000'
         }
     }
 }
@@ -263,49 +268,16 @@ export default {
           line-height: 80px;
           font-size:25px;
       }
-<<<<<<< HEAD
-      main{
-          flex:1;
-          width: 100%;
-          overflow: auto;
-      }
-=======
-
->>>>>>> lj
   }
 .el-aside{
   background: #242A3F;
-  color: #fff;
   ul{
-    background: #242A3F;
-    color: #fff;
     li{
-      background: #242A3F;
       span{
         color: #fff;
       }
     }
   }
-  .el-submenu__title:hover{
-    background: #242A3F;
-  }
-  ul li:hover{
-    background: #242A3F;
-  }
-    ul li:active{
-    background: #242A3F;
-  }
-  a{
-    text-decoration: none;
-  }
 }
-.el-menu-item{
-  background: #000;
-}
-.el-menu-item:active{
-  background: #000;
-}
-.click{
-  background: #000;
-}
+
 </style>
