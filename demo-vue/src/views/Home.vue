@@ -268,6 +268,14 @@ export default {
           line-height: 80px;
           font-size:25px;
       }
+<<<<<<< HEAD
+=======
+      main{
+          flex:1;
+          width: 100%;
+          overflow: auto;
+      }
+>>>>>>> fxx
   }
 .el-aside{
   background: #242A3F;
