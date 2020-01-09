@@ -54,25 +54,25 @@ const routes = [
                 children:[
                     {
                         path:'/home/show',
-                        redirect:'/home/adduser/userlist'
+                        redirect:'/home/show/userlist'
                     }, 
                     {
-                        path:'/home/adduser/userlist',
+                        path:'/home/show/userlist',
                         component: UserList
                     }, {
-                        path:'/home/adduser/relation',
+                        path:'/home/show/relation',
                         component:Relation
                     }, {
-                        path:'/home/adduser/jurisdiction',
+                        path:'/home/show/jurisdiction',
                         component:Jurisdiction
                     }, {
-                        path:"/home/adduser/Identity",
+                        path:"/home/show/Identity",
                         component:Identity
                     }, {
-                        path:'/home/adduser/permissions',
+                        path:'/home/show/permissions',
                         component:Permissions
                     }, {
-                        path:'/home/adduser/prot',
+                        path:'/home/show/prot',
                         component:Prot
                     }
                 ]

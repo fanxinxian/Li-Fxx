@@ -3,13 +3,14 @@
         <p style="font-size:20px;margin:10px 0 10px 10px;background-color: #E9EEF3;">学生管理</p>
         <div class="header">
             <el-input v-model="sizeForm.name" placeholder="输入学生姓名" size="small" class="el-input"></el-input>
+            <el-input v-model="sizeForm.student_id" placeholder="输入学号" size="small" class="el-input"></el-input>
             <el-select v-model="sizeForm.region"  size="small" placeholder="请输入教室号" class="el-option">
-                <el-option class="el-option " v-for="(item,ind) in tabList" :key="ind" :label="item.room_text" value="shanghai"></el-option>
+                <el-option class="el-option " v-for="(item,ind) in tabList" :key="ind" :label="item.room_text" :value="item.room_text"></el-option>
             </el-select>
-            <el-select v-model="sizeForm.region"  size="small" placeholder="班级名" class="el-option">
-                <el-option v-for="(item,ind) in tableData" :key="ind" :label="item.grade_name" value="shanghai"></el-option>
+            <el-select v-model="sizeForm.grade_name"  size="small" placeholder="班级名" class="el-option">
+                <el-option v-for="(item,ind) in tabList" :key="ind" :label="item.grade_name" :value="item.grade_name"></el-option>
             </el-select>
-            <el-button type="primary" size="small" class="el-button" @click="btnSecah(sizeForm.name)">搜索</el-button>
+            <el-button type="primary" size="small" class="el-button" @click="btnSecah(sizeForm)">搜索</el-button>
             <el-button type="primary" size="small" class="el-button" @click="btnReset">重置</el-button>
         </div>
          <el-table
@@ -68,7 +69,9 @@ export default {
         return {
             sizeForm:{
                 region:'',
-                name:''
+                name:'',
+                student_id:'',
+                grade_name:''
             },
             count:1,
             start:0,
@@ -89,7 +92,8 @@ export default {
         btnReset(){
             this.sizeForm = {
                 region:'',
-                name:''
+                name:'',
+                student_id:''
             }
             this.getList();
         },

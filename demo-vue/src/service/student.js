@@ -17,7 +17,13 @@ const student = {
             state.list = state.tabList.slice(state.start = (state.count - 1) * state.emit, state.emit);
         },
         btnSecah(state, data){
-            state.list = state.tabList.filter(item=>item.student_name === data);
+            if(data.name){
+                state.list = state.tabList.filter(item=>item.student_name === data.name);
+            }else if(data.student_id){
+                state.list = state.tabList.filter(item=>item.student_name === data.student_id);
+            }else{
+                console.log(data);
+            }
         }
     },
     actions: {
