@@ -5,20 +5,21 @@
         <h2>班级管理</h2>
     </el-header>
     <el-main class="elmain">
-      <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加班级</el-button>
+    <el-button type="primary" icon="el-icon-plus" 
+      @click="dialogFormVisible = true">添加班级</el-button>
 <el-dialog title="添加班级" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="班级名" :label-width="formLabelWidth">
-      <el-input autocomplete="off" placeholder="班级名"></el-input>
+      <el-input autocomplete="off" v-model="grade" placeholder="班级名"></el-input>
     </el-form-item>
       <el-form-item label="教室号" :label-width="formLabelWidth">
-      <el-select placeholder="请选择教室号">
-        <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.room_text"  value="room_text"></el-option>
+      <el-select placeholder="请选择教室号" v-model="room">
+        <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.room_text"  :value="item.room_id"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="课程名" :label-width="formLabelWidth">
-      <el-select placeholder="请选择课程名">
-        <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.subject_text"  value="subject_text"></el-option>
+      <el-select placeholder="请选择课程名" v-model="subject">
+        <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.subject_text"  :value="item.subject_id"></el-option>
       </el-select>
     </el-form-item>
 
@@ -52,7 +53,7 @@
       width="230">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">修改</el-button>
-        |<el-button type="text" size="small">删除</el-button>
+        |<el-button type="text" size="small" @click="del">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -62,7 +63,6 @@
     
 </template>
 <script>
-// import axios from 'axios'
 import {mapState, mapActions} from 'vuex'
 export default {
     props:{
@@ -74,6 +74,9 @@ export default {
     data(){
         return {
             gridData: [],
+            grade:'',
+            room:'',
+            subject:'',
             dialogTableVisible: false,
             dialogFormVisible: false,
             form: {
@@ -84,7 +87,7 @@ export default {
                 delivery: false,
                 type: [],
                 resource: '',
-                desc: ''
+                desc: '',
             },
             formLabelWidth: '120px'
         };
@@ -92,7 +95,8 @@ export default {
     computed:{
         ...mapState('Grade', [
             'cardArr',
-            'gradeArr'
+            'gradeArr',
+            'delArr'
         ])
     },
     methods:{
@@ -101,11 +105,21 @@ export default {
         },
         ...mapActions('Grade', [
             'addCardFun',
-            'addGradeFun'
+            'addGradeFun',
+            'deleteFun'
         ]),
         sure(){//确定按钮
-            this.dialogFormVisible = false
-            console.log(1)
+            let {grade, room, subject} = this;
+            console.log(grade, room, subject)
+            this.addGradeFun({grade, room, subject});
+            location.reload()
+            this.dialogFormVisible = false;
+        },
+        del(){
+            let {id} = this
+            console.log(id)
+            this.deleteFun({id})
+            // this.addCardFun()
         }
     },
     created(){

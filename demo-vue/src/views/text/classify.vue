@@ -44,10 +44,8 @@
 import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
     props:{
-
     },
     components:{
-
     },
     data(){
         return {
@@ -94,7 +92,6 @@ export default {
         this.addCardFun()
     },
     mounted(){
-
     }
 }
 </script>
@@ -114,6 +111,4 @@ export default {
     border-radius: 10px;
     margin-top: 30px;
   }
-
-
 </style>

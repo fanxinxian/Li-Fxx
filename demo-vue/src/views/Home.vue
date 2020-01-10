@@ -128,10 +128,12 @@
         </el-aside>
         <el-main>
           <div class="box">
-            <div>
+            <div class="title">
               {{$route.meta.title}}
             </div>
-              <router-view></router-view>
+              <div class="view">
+                <router-view></router-view>
+              </div>
           </div>
         </el-main>
       </el-container>
@@ -283,5 +285,8 @@ export default {
     transform: 0.1;
   }
 }
-
+.view{
+    width: 100%;
+    height: 100%;
+}
 </style>
