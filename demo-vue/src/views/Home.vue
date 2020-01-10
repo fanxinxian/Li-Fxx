@@ -263,7 +263,8 @@ export default {
       height: 100%;
       display: flex;
       flex-direction: column;
-      margin: 0 auto;
+      justify-content: space-around;
+      align-items: center;
       header{
           width: 100%;
           height: 80px;
@@ -289,4 +290,5 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 </style>

@@ -13,8 +13,8 @@ const rooms = {
             state.cardArr = obj;
         },
         addQuestionsFun(state, obj){
-            let sort = state.cardArr.length + 1
-            // console.log(obj)
+            let sort = Math.random() * 1
+            console.log(sort)
             axios.get('/api/exam/insertQuestionsType', {params:{text:obj, sort}}).then(res=>{
                 console.log(res)
             })

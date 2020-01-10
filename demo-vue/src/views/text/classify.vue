@@ -85,7 +85,7 @@ export default {
         sure(){
             this.addQuestionsFun(this.text)
             this.dialogFormVisible = false;
-            this.addCardFun()
+            location.reload()
         }
     },
     created(){

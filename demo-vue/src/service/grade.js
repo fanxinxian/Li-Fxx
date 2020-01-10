@@ -7,17 +7,12 @@ const card = {
     state: {
         cardArr: [],
         gradeArr:[],
-<<<<<<< HEAD
         row:''
-=======
-        delArr:[]
->>>>>>> lj
     },
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
         },
-<<<<<<< HEAD
         addGrade(state, obj){
             state.gradeArr = obj;
         },
@@ -27,11 +22,6 @@ const card = {
         set_row(state, row){
             state.row = row;
         },
-=======
-        delCard(state, obj){
-            state.delArr = obj
-        }
->>>>>>> lj
     },
     actions: {
         addCardFun({commit}){//查看班级管理
