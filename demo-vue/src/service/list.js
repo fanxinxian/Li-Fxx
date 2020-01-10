@@ -10,12 +10,14 @@ const lists = {
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
+            console.log(state.cardArr);
         }
     },
     actions: {
         addCardFun({commit}){
-            axios.get('/api/exam/exam/w5tcy-g2dts').then(({data})=>{
-                commit("addCard", data.data)
+            axios.get('/api/exam/exam').then(res=>{
+                console.log(res);
+                commit("addCard", res.data.exam)
             })
         }
     }

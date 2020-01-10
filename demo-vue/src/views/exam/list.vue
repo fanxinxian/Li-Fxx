@@ -1,12 +1,12 @@
 <template>
     <div class="grade">
-<el-container>
+    <el-container>
     <el-header>
         <h2>试卷列表</h2>
     </el-header>
     <el-main class="maintop">
         <div class="maintop-2">
-<el-form :inline="true" :model="formInline" class="demo-form-inline">
+            <el-form :inline="true" :model="formInline" class="demo-form-inline">
             <el-form-item label="考试类型:">
                 <el-select v-model="formInline.region">
                 <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.exam_name"  value="exam_name"></el-option>
@@ -26,56 +26,47 @@
     <div class="main-bottom">
         <div class="main-bottom-top">
             <h2>试卷列表</h2>
-        <div class="span">
-
         </div>
-        </div>
-        <el-table
-    :data="cardArr"
-    style="width: 100%"
-    max-height="250">
-    <el-table-column
-      fixed
-      prop="date"
-      label="试卷信息"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="班级"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="province"
-      label="创建人"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="city"
-      label="开始时间"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="结束时间"
-      width="300">
-    </el-table-column>
-    <el-table-column
-      fixed="right"
-      label="操作"
-      width="120">
-      <template slot-scope="scope">
+    <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+            prop="title"
+            label="试卷信息"
+            width="180">
+        </el-table-column>
+        <el-table-column
+            prop="grade_name"
+            label="班级"
+            width="180">
+        </el-table-column>
+        <el-table-column
+            prop="user_name"
+            label="创建人">
+        </el-table-column>
+        <el-table-column
+            prop="start_time"
+            label="开始时间">
+        </el-table-column>
+        <el-table-column
+            prop="end_time"
+            label="结束时间">
+        </el-table-column>
+        <el-table-column
+            fixed="right"
+            label="操作"
+            width="120">
+        <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
-          type="text"
-          size="small">
-          详情
+            @click.native.prevent="deleteRow(scope.$index, tableData)"
+            type="text"
+            size="small">
+            详情
         </el-button>
       </template>
     </el-table-column>
-  </el-table>
+        </el-table>
     </div>
-    {{cardArr}}
 </el-container>
     </div>
 </template>
@@ -117,7 +108,7 @@ export default {
         }
     },
     created(){
-        this.addCardFun()
+        this.addCardFun();
     },
     mounted(){
 
