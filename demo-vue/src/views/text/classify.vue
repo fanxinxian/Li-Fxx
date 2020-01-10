@@ -90,6 +90,7 @@ export default {
             this.text = '';
             this.sort = '';
             this.dialogFormVisible = false;
+            location.reload()
         }
     },
     created(){
