@@ -5,13 +5,7 @@ import Cookie from 'js-cookie';
 import { Message } from 'element-ui';
 let instance = axios.create();
 instance.defaults.timeout = 3000;
-// if (process.env.NODE_ENV === 'development') {
-//     instance.defaults.baseURL = '/dev'
-// } else if (process.env.NODE_ENV === 'test') {
-//     instance.defaults.baseURL = '/test'
-// } else if (process.env.NODE_ENV === 'producation') {
-//     instance.defaults.baseURL = '/pro' 
-// }
+
 instance.interceptors.request.use(function (config) {
     if(config.url !== '/api/user/login'){
         let token = Cookie.get('token');
@@ -31,7 +25,7 @@ instance.interceptors.response.use(function (response) {
     let title = Stanum[`${error.response.status}`];
     Message({
         message: title,
-        type: 'success',
+        type: 'error',
         duration: 3000
     })
     return Promise.reject(error);

@@ -6,10 +6,18 @@ const rooms = {
     namespaced: true,
     state: {
         cardArr: [],
+        dialogFormVisible:true
     },
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
+        },
+        addQuestionsFun(state, obj){
+            let sort = state.cardArr.length + 1
+            // console.log(obj)
+            axios.get('/api/exam/insertQuestionsType', {params:{text:obj, sort}}).then(res=>{
+                console.log(res)
+            })
         }
     },
     actions: {
@@ -18,9 +26,8 @@ const rooms = {
                 commit("addCard", data.data)
             })
         },
-        
+       
     }
-}
-  
+} 
 //导出
 export default rooms;

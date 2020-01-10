@@ -6,6 +6,7 @@ import Elementui from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(Elementui);
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -13,3 +14,4 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
+
