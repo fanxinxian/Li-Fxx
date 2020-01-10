@@ -1,23 +1,22 @@
 <template>
     <div class="grade">
         <el-container>
-    <el-header>
-        <h2>教室管理</h2>
-    </el-header>
-    <el-main>
-        <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加教室</el-button>
-
-<el-dialog title="添加教室" :visible.sync="dialogFormVisible" class="dialog">
-  <el-form :model="form">
-    <el-form-item label="教室号">
-      <el-input v-model="form.name" autocomplete="off"></el-input>
-    </el-form-item>
-  </el-form>
-  <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            <el-header>
+                <h2>教室管理</h2>
+            </el-header>
+            <el-main>
+                <el-button type="primary" icon="el-icon-plus" @click="addlist">添加教室</el-button>
+                <el-dialog title="添加教室" :visible.sync="dialogFormVisible" class="dialog">
+                <el-form :model="form">
+                <el-form-item label="教室号">
+                <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="Surelist">确 定</el-button>
   </div>
-</el-dialog>
+      </el-dialog>
         <el-table
     :data="cardArr"
     style="width: 100%">
@@ -34,10 +33,20 @@
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
       </template>
-    </el-table-column>
-  </el-table>
-    </el-main>
-</el-container>
+        </el-table-column>
+        </el-table>
+        </el-main>
+      </el-container>
+        <el-dialog
+          title="提示"
+          :visible.sync="dialogVisible"
+          width="30%">
+          <span>您确定要删除么？</span>
+          <span slot="footer" class="dialog-footer">
+    <el-button @click="sure">取 消</el-button>
+    <el-button type="primary" @click="deletes">确 定</el-button>
+  </span>
+</el-dialog>
     </div>
 </template>
 <script>
@@ -54,6 +63,7 @@ export default {
             tableData: [],
             dialogTableVisible: false,
             dialogFormVisible: false,
+            dialogVisible: false,
             form: {
                 name: '',
                 region: '',
@@ -64,21 +74,38 @@ export default {
                 resource: '',
                 desc: ''
             },
+            id:'',
             formLabelWidth: '120px'
         };
     },
     computed:{
         ...mapState('Room', [
-            'cardArr'
+            'cardArr', 
         ])
     },
     methods:{
+        Surelist(){
+            this.addlistFn(this.form.name);
+            this.dialogFormVisible = false;
+            this.addCardFun();
+        },
+        addlist(){
+            this.dialogFormVisible = true;
+        },
+        deletes(){
+            this.deleteFn(this.id);
+            this.dialogVisible = false;
+        },
         handleClick(row) {
-            console.log(row);
+            this.id = row.room_text
+            this.dialogVisible = true;
+        },
+        sure(){
+            this.dialogVisible = false;
         },
         ...mapActions('Room', [
-            'addCardFun'
-        ])
+            'addCardFun', 'deleteFn', 'addlistFn'
+        ]),
     },
     created(){
         this.addCardFun()

@@ -6,7 +6,7 @@
     </el-header>
     <el-main class="elmain">
     <el-button type="primary" icon="el-icon-plus" 
-      @click="dialogFormVisible = true">添加班级</el-button>
+      @click="dialogFormVisible = true;">添加班级</el-button>
 <el-dialog title="添加班级" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="班级名" :label-width="formLabelWidth">
@@ -53,12 +53,23 @@
       width="230">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">修改</el-button>
-        |<el-button type="text" size="small" @click="del">删除</el-button>
+        <!-- |<el-button type="text" size="small" @click="del">删除</el-button> -->
+        <el-button @click="del(scope.row)" type="text" size="small">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
     </el-main>
 </el-container>
+    <el-dialog
+          title="提示"
+          :visible.sync="dialogVisible"
+          width="30%">
+          <span>您确定要删除么？</span>
+          <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="deletes">确 定</el-button>
+  </span>
+</el-dialog>
     </div>
     
 </template>
@@ -89,7 +100,9 @@ export default {
                 resource: '',
                 desc: '',
             },
-            formLabelWidth: '120px'
+            formLabelWidth: '120px',
+            dialogVisible:false,
+            id:'',
         };
     },
     computed:{
@@ -100,27 +113,31 @@ export default {
         ])
     },
     methods:{
-        handleClick(row) {
-            console.log(row);
+        handleClick() {
+            // this.grade = row.grade_name;
+            this.dialogFormVisible = true;
+            // this.updataList();
         },
         ...mapActions('Grade', [
             'addCardFun',
             'addGradeFun',
-            'deleteFun'
+            'deleteFun',
         ]),
         sure(){//确定按钮
             let {grade, room, subject} = this;
-            console.log(grade, room, subject)
             this.addGradeFun({grade, room, subject});
-            location.reload()
             this.dialogFormVisible = false;
+            this.addCardFun()
         },
-        del(){
-            let {id} = this
-            console.log(id)
-            this.deleteFun({id})
-            // this.addCardFun()
-        }
+        del(row){
+            this.id = row.grade_id
+            this.dialogVisible = true;
+        },
+        deletes(){
+            this.deleteFun(this.id);
+            this.dialogVisible = false;
+            this.addCardFun();
+        },
     },
     created(){
         this.addCardFun()

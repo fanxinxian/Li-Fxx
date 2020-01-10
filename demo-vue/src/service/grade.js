@@ -1,4 +1,5 @@
 import axios from '../uitl/request'
+import { Message } from 'element-ui';
 const card = {
     /**
      * 定义命名空间，防止多个模块同名共享，使用时需要带上命名空间
@@ -34,15 +35,45 @@ const card = {
                 console.log(data);
             })
         },
-        deleteFun( state, {id}){//删除班级
-            axios.delete('/api/manger/grade/delete', {grade_id:id}).then(res=>{
-                console.log(res)
+        deleteFun( state, grade_id){//删除班级
+            axios.delete('/api/manger/grade/delete', {grade_id}).then(res=>{
+                if(res.data.code === 1){
+                    Message({
+                        message: res.data.msg,
+                        type: 'success',
+                        duration: 2000
+                    })
+                }else{
+                    Message({
+                        message: res.data.msg,
+                        type: 'error',
+                        duration: 2000
+                    })
+                }
             })
         }, 
         currect({commit, state}){
             axios.get('/api/exam/student', {params:{grade_id:state.row.grade_name}}).then(res=>{
                 // console.log(res);
                 commit('set_currect', res.data.exam)
+            })
+        },
+        updataList(){
+            axios.PUT('/api/manger/grade/update', {}).then(res=>{
+                console.log(res);
+                if(res.data.code === 1){
+                    Message({
+                        message: res.data.msg,
+                        type: 'success',
+                        duration: 2000
+                    })
+                }else{
+                    Message({
+                        message: res.data.msg,
+                        type: 'error',
+                        duration: 2000
+                    })
+                }
             })
         }
     }
