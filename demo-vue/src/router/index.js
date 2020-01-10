@@ -97,7 +97,7 @@ const routes = [
                 path:'/home/await',
                 component:Await
             }, {
-                path:'/home/correct/:id',
+                path:'/home/correct',
                 component:Correct
             }
         ]

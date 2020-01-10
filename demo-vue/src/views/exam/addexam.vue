@@ -7,28 +7,28 @@
     <el-main>
     <el-form ref="form" label-width="120px">
   <el-form-item label="试卷名称">
-    <el-input style="width:300px"></el-input>
+    <el-input style="width:300px" v-model="sizeForm.name" ></el-input>
   </el-form-item>
   <el-form-item label="请选择考试类型">
-    <el-select>
-      <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.exam_name"  value="exam_name"></el-option>
+    <el-select v-model="sizeForm.date1">
+      <el-option  v-for="(item,ind) in testTimeList" :key="ind" :label="item.exam_name"  :value="item.exam_name"></el-option>
     </el-select>
   </el-form-item>
    <el-form-item label="请选择课程">
-    <el-select>
-      <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.subject_text"  value="subject_text"></el-option>
+    <el-select v-model="sizeForm.date2">
+      <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.subject_text"  :value="item.subject_text"></el-option>
     </el-select>
   </el-form-item>
     <el-form-item label="设置题量">
-    <el-input v-model="sizeForm.name" style="width:200px"></el-input>
+    <el-input-number v-model="sizeForm.num" controls-position="right" @change="handleChange" :min="3" :max="10"></el-input-number>
   </el-form-item>
   <el-form-item label="考试时间">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="选择日期" v-model="start_time" style="width:400px"></el-date-picker>
+      <el-date-picker type="date" placeholder="选择日期" v-model="sizeForm.start_time" style="width:400px"></el-date-picker>
     </el-col>
      <el-col class="line" :span="2">---</el-col>
     <el-col :span="11">
-      <el-time-picker placeholder="选择时间" v-model="end_time" style="width:400px"></el-time-picker>
+      <el-time-picker placeholder="选择时间" v-model="sizeForm.end_time" style="width:400px"></el-time-picker>
     </el-col>
   </el-form-item>
 
@@ -53,34 +53,43 @@ export default {
         return {
             sizeForm: {
                 name: '',
-                region: '',
                 date1: '',
                 date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
-            }
+                end_time:'',
+                start_time:'',
+                num:''
+            },
         };
     },
     computed:{
         ...mapState('Addexam', [
-            'cardArr'
+            'cardArr', 'testTimeList'
         ])
     },
     methods:{
-        handleClick(row) {
-            console.log(row);
+        handleChange(value) {
+            console.log(value);
         },
         ...mapActions('Addexam', [
-            'addCardFun'
+            'addCardFun', 'testTime', 'addtestFn'
         ]),
         onSubmit() {
-            console.log('submit!');
-        }
+            this.sizeForm.start_time = this.sizeForm.start_time * 1;
+            this.sizeForm.end_time = this.sizeForm.end_time * 1;
+            this.addtestFn(this.sizeForm);
+            this.sizeForm = {
+                name: '',
+                date1: '',
+                date2: '',
+                end_time:'',
+                start_time:'',
+                num:''
+            }
+        },
     },
     created(){
-        this.addCardFun()
+        this.addCardFun();
+        this.testTime();
     },
     mounted(){
 

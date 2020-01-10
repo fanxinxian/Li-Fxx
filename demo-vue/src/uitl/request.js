@@ -31,4 +31,17 @@ instance.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-export default instance
+export default{
+    get(url, params){
+        return instance.get(url, {params})
+    },
+    post(url, params){
+        return instance.post(url, params)
+    },
+    delete(url, params){
+        return instance.delete(url, {data:params})
+    },
+    put(url, params){
+        return instance.put(url, params)
+    }
+}

@@ -1,8 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div class="adduser">
-        添加用户
-=======
     <div class="grade">
 <el-container>
     <el-header>
@@ -15,7 +11,6 @@
        <AdduserHead></AdduserHead>
     </el-main>
 </el-container>
->>>>>>> lj
     </div>
 </template>
 <script>

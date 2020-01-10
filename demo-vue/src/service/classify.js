@@ -1,4 +1,5 @@
 import axios from '../uitl/request'
+import { Message } from 'element-ui';
 const rooms = {
     /**
      * 定义命名空间，防止多个模块同名共享，使用时需要带上命名空间
@@ -12,11 +13,25 @@ const rooms = {
         addCard(state, obj){
             state.cardArr = obj;
         },
-        addQuestionsFun(state, obj){
-            let sort = state.cardArr.length + 1
-            // console.log(obj)
-            axios.get('/api/exam/insertQuestionsType', {params:{text:obj, sort}}).then(res=>{
-                console.log(res)
+        addQuestionsFun(state, {text, sort}){
+            console.log( typeof sort)
+            if(typeof sort !== Number){
+                Message({
+                    message: 'id请输入数值',
+                    type: 'error',
+                    duration: 3000
+                })
+                return 
+            }
+            axios.get('/api/exam/insertQuestionsType', {text, sort}).then(res=>{
+                console.log(res);
+                if(res.data.code === 1){
+                    Message({
+                        message: res.data.msg,
+                        type: 'success',
+                        duration: 3000
+                    })
+                }
             })
         }
     },
