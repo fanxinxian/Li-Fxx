@@ -1,20 +1,19 @@
 <template>
-    <div class="grade">
-        <el-container>
+<div class="grade">
+    <el-container>
     <el-header>
         <h2>试题分类</h2>
     </el-header>
     <el-main>
-        <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加类型</el-button>
-<el-dialog title="创建新类型" :visible.sync="dialogFormVisible" class="dialog">
+<el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加类型</el-button>
+    <el-dialog title="创建新类型" :visible.sync="dialogFormVisible" class="dialog">
           <el-input v-model="text" placeholder="请输入用户名"></el-input>
-          <el-input v-model="sort" placeholder="请输入自定义"></el-input>
         <div slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="sure(text)">确 定</el-button>
+    <el-button type="primary" @click="sure">确 定</el-button>
     <!-- {text, dialogFormVisible} -->
     <el-button @click="dialogFormVisible = false">取 消</el-button>
   </div>
-</el-dialog>
+    </el-dialog>
 <el-table
     :data="cardArr"
     style="width: 100%">
@@ -64,14 +63,12 @@ export default {
                 desc: ''
             },
             text:'',
-            sort:'',
             formLabelWidth: '120px'
         };
     },
     computed:{
         ...mapState('Classify', [
-            'cardArr',
-            // 'dialogFormVisible'
+            'cardArr'
         ])
     },
     methods:{
@@ -85,16 +82,16 @@ export default {
             'addQuestionsFun',
         ]),
         sure(){
-            this.addQuestionsFun({text:this.text, sort:this.sort});
-            // this.addCardFun();
+            this.addQuestionsFun(this.text, this.sort)
+            console.log(this.text)
             this.text = '';
-            this.sort = '';
+            // this.addCardFun()
             this.dialogFormVisible = false;
             location.reload()
         }
     },
     created(){
-        this.addCardFun();
+        this.addCardFun()
     },
     mounted(){
     }
