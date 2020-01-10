@@ -5,26 +5,26 @@ const user = {
      */
     namespaced: true,
     state: {
-        userList: [],
+        cardArr: [],
     },
     mutations: {
         addCard(state, obj){
-            state.userList = obj;
+            state.cardArr = obj;
         },
         set_identity(state, obj){
-            state.userList = obj;
+            state.cardArr = obj;
         },
         set_port(state, obj){
-            state.userList = obj;
+            state.cardArr = obj;
         },
         set_jurisdiction(state, obj){
-            state.userList = obj;
+            state.cardArr = obj;
         },
         set_permissions(state, obj){
-            state.userList = obj;
+            state.cardArr = obj;
         },
         set_relation(state, obj){
-            state.userList = obj;
+            state.cardArr = obj;
         }
     },
     actions: {

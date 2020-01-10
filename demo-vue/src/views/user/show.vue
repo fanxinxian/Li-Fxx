@@ -9,7 +9,6 @@
                 <el-button plain><router-link to="/home/show/jurisdiction">身份证和api接口的关系</router-link></el-button>
                 <el-button plain><router-link to="/home/show/permissions">试图接口权限</router-link></el-button>
                 <el-button plain><router-link to="/home/show/relation">身份和视图权限接口关系</router-link></el-button>
-                
             </div>
             <h3></h3>
             <div>

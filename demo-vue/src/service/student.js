@@ -5,26 +5,36 @@ const student = {
      */
     namespaced: true,
     state: {
-        tabList:[],
+        cardArr:[],
         list:[],
+        //当前页
         count:1,
+        //当前页的索引
         start:0,
-        emit:10,
+        //条数
+        emit:15,
+        //总页数
+        sum:0
     },
     mutations: {
         setList(state, obj){
-            state.tabList = obj;
-            state.list = state.tabList.slice(state.start = (state.count - 1) * state.emit, state.emit);
+            state.cardArr = obj;
+            state.sum = Math.ceil(state.cardArr.length / state.emit);0
         },
         btnSecah(state, data){
-            if(data.name){
-                state.list = state.tabList.filter(item=>item.student_name === data.name);
+            console.log(data);
+            if(data.region && data.grade_name){
+                state.cardArr = state.cardArr.filter(item=>item.student_name === data.grade_name && item.room_text === data.region);
+            }else if(data.names){
+                state.cardArr = state.cardArr.filter(item=>item.student_name === data.names);
             }else if(data.student_id){
-                state.list = state.tabList.filter(item=>item.student_name === data.student_id);
-            }else{
-                console.log(data);
+                state.cardArr = state.cardArr.filter(item=>item.student_id === data.student_id);
+            }else if(data.region){
+                state.cardArr = state.cardArr.filter(item=>item.room_text === data.region);
+            }else if(data.grade_name){
+                state.cardArr = state.cardArr.filter(item=>item.grade_name === data.grade_name);
             }
-        }
+        },
     },
     actions: {
         getList({commit}){

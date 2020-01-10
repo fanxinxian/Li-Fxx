@@ -1,62 +1,55 @@
 <template>
     <div class="await">
-         <p style="font-size:20px;margin:10px 0 10px 10px;background-color: #E9EEF3;">学生管理</p>
+         <p style="font-size:20px;margin:10px 0 10px 10px;background-color: #E9EEF3;">待批班级</p>
          <el-table
-         class="el-table"
-            :data="tableData = (cardArr.slice(start = (count - 1) * emit, emit))"
-            style="width: 100%;height:500px;">
-            <el-table-column
-                label="班级"
-                prop="grade_name">
-            </el-table-column>
-            <el-table-column
-                label="课程名称"
-                prop="subject_text">
-            </el-table-column>
-            <el-table-column
-                label="阅卷状态"
-                prop="grade_name">
-            </el-table-column>
-            <el-table-column
-                label="成材率"
-                prop="room_text">
-            </el-table-column>
-            <el-table-column
-                label="操作"
-                prop="name">
-                <span>批卷</span>
-            </el-table-column>
-        </el-table>
-    <div class="block">
-    <el-pagination
-        style='width:100%;background:#fff;padding-left:60%;'
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="sum"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="cardArr.length">
-    </el-pagination>
+            :data="cardArr.slice((currentPage - 1)*pagesize, currentPage*pagesize)"
+            style="width: 100%">
+        <el-table-column
+            label="班级名"
+            prop="grade_name">
+        </el-table-column>
+        <el-table-column
+            label="课程名称"
+            prop="subject_text">
+        </el-table-column>
+        <el-table-column
+            label="阅卷状态"
+            prop="name">
+        </el-table-column>
+        <el-table-column
+            label="成材率"
+            prop="room_text">
+        </el-table-column>
+        <el-table-column
+            label="操作"
+            prop="name">
+        <template slot-scope="scope">
+        <el-button
+          style="border:none;background:none"
+          size="mini"
+          @click="handleEdit(scope.row)">批卷</el-button>
+        </template>
+    </el-table-column>
+  </el-table>
+    <div>
+        <Knockout :currentPage="currentPage" :pagesize="pagesize" :cardArr="cardArr" @Change="Change"/>
     </div>
     </div>
 </template>
 <script>
-import { mapActions, mapState} from 'vuex'
+import { mapActions, mapState, mapMutations} from 'vuex'
+import Knockout from '../../components/knockout '
 export default {
     props:{
 
     },
     components:{
-
+        Knockout
     },
     data(){
         return {
-            sum:111,
-            start:0,
-            count:1,
-            emit:10,
-            currentPage4:4
+            currentPage:1,
+            pagesize:15
         }
     },
     computed:{
@@ -64,19 +57,13 @@ export default {
     },
     methods:{
         ...mapActions('Grade', ['addCardFun']),
-        handleEdit(index, row) {
-            console.log(index, row);
+        ...mapMutations('Grage', ['set_row']),
+        handleEdit(row) {
+            this.$router.push({path:'/home/correct', query:{id:row.grade_name}});
         },
-        handleDelete(index, row) {
-            console.log(index, row);
-        },
-        handleCurrentChange(){
-
-        },
-        handleSizeChange(){
-
+        Change(val){
+            this.currentPage = val;
         }
-
     },
     created(){
         this.addCardFun();
@@ -88,6 +75,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .el-table{
-    height: 100% !important;
+    
 }
 </style>

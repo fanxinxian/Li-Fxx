@@ -1,22 +1,22 @@
 <template>
     <div class="student">
-        <p style="font-size:20px;margin:10px 0 10px 10px;background-color: #E9EEF3;">学生管理</p>
+        <p style="font-size:20px;margin:10px 0 0 10px;background-color: #E9EEF3;">学生管理</p>
         <div class="header">
-            <el-input v-model="sizeForm.name" placeholder="输入学生姓名" size="small" class="el-input"></el-input>
+            <el-input v-model="sizeForm.names" placeholder="输入学生姓名" size="small" class="el-input"></el-input>
             <el-input v-model="sizeForm.student_id" placeholder="输入学号" size="small" class="el-input"></el-input>
             <el-select v-model="sizeForm.region"  size="small" placeholder="请输入教室号" class="el-option">
-                <el-option class="el-option " v-for="(item,ind) in tabList" :key="ind" :label="item.room_text" :value="item.room_text"></el-option>
+                <el-option class="el-option " v-for="(item,ind) in cardArr" :key="ind" :label="item.room_text" :value="item.room_text"></el-option>
             </el-select>
-            <el-select v-model="sizeForm.grade_name"  size="small" placeholder="班级名" class="el-option">
-                <el-option v-for="(item,ind) in tabList" :key="ind" :label="item.grade_name" :value="item.grade_name"></el-option>
+            <el-select v-model="sizeForm.grade_name"   size="small" placeholder="班级名" class="el-option">
+                <el-option v-for="(item,ind) in cardArr" :key="ind" :label="item.grade_name" :value="item.grade_name"></el-option>
             </el-select>
             <el-button type="primary" size="small" class="el-button" @click="btnSecah(sizeForm)">搜索</el-button>
             <el-button type="primary" size="small" class="el-button" @click="btnReset">重置</el-button>
         </div>
          <el-table
             class="el-table"
-            :data="list"
-            style="width: 100%;height:100%;">
+            :data="cardArr.slice((currentPage - 1)*pagesize, currentPage*pagesize)"
+            style="width: 100%;">
                 <el-table-column
                     label="姓名"
                     prop="student_name">
@@ -44,65 +44,54 @@
                 </el-table-column>
         </el-table>
     <div class="block">
-    <!-- <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="sum"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="tabList.length">
-    </el-pagination> -->
+        <Konckout :pagesize="pagesize" :cardArr="cardArr" :currentPage="currentPage" @Change="Change"/>
     </div>
     </div>
 </template>
 <script>
 import { mapActions, mapState, mapMutations} from 'vuex'
+import Konckout from '../../components/knockout '
 export default {
+    name:'student',
     props:{
 
     },
     components:{
-
+        Konckout
     },
     data(){
         return {
             sizeForm:{
                 region:'',
-                name:'',
+                names:'',
                 student_id:'',
                 grade_name:''
             },
-            count:1,
-            start:0,
-            emit:10,
-            tableData:[],
+            currentPage:1,
+            pagesize:15
         }
     },
     computed:{
         ...mapState('student', [
-            'tabList', 'list'
+            'cardArr', 'list', 'sum', 'count'
         ]),
     },
     methods:{
+        Change(val){
+            this.currentPage = val;
+        },
+        ...mapMutations('student', ['btnSecah']),
         ...mapActions('student', [
             'getList',
         ]),
-        ...mapMutations('student', ['btnSecah']),
         btnReset(){
             this.sizeForm = {
                 region:'',
-                name:'',
+                names:'',
                 student_id:''
             }
             this.getList();
         },
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
-        }
     },
     created(){
         this.getList();
@@ -116,7 +105,7 @@ export default {
 .student{
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
 }
 .el-input{
     width: 190px;

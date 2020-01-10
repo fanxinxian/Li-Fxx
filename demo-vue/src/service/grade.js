@@ -6,7 +6,8 @@ const card = {
     namespaced: true,
     state: {
         cardArr: [],
-        gradeArr:[]
+        gradeArr:[],
+        row:''
     },
     mutations: {
         addCard(state, obj){
@@ -14,7 +15,13 @@ const card = {
         },
         addGrade(state, obj){
             state.gradeArr = obj;
-        }
+        },
+        set_currect(state, obj){
+            state.cardArr = obj;
+        },
+        set_row(state, row){
+            state.row = row;
+        },
     },
     actions: {
         addCardFun({commit}){//查看班级管理
@@ -26,8 +33,13 @@ const card = {
             axios.post('/api/manger/grade').then((data)=>{
                 commit('addGrade', data.data)
             })
+        }, 
+        currect({commit, state}){
+            axios.get('/api/exam/student', {params:{grade_id:state.row.grade_name}}).then(res=>{
+                // console.log(res);
+                commit('set_currect', res.data.exam)
+            })
         }
-        
     }
 }
   

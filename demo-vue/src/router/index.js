@@ -25,6 +25,8 @@ import Permissions from '../views/user/children/permissions'
 import Jurisdiction from '../views/user/children/jurisdiction'
 import Identity from '../views/user/children/identity'
 import Prot from '../views/user/children/port'
+//批卷页面
+import Correct  from '../components/correct '
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,7 +37,7 @@ const routes = [
     {
         path:'/home',
         component:Home,
-        children:[
+        children:[ 
             {
                 path:'/home/addtext',
                 component:Addtext
@@ -94,6 +96,9 @@ const routes = [
             }, {
                 path:'/home/await',
                 component:Await
+            }, {
+                path:'/home/correct/:id',
+                component:Correct
             }
         ]
     }, {
