@@ -27,6 +27,9 @@ import Identity from '../views/user/children/identity'
 import Prot from '../views/user/children/port'
 //批卷页面
 import Correct  from '../components/correct '
+//个人中心
+import Personage from '../components/personage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -99,6 +102,9 @@ const routes = [
             }, {
                 path:'/home/correct',
                 component:Correct
+            }, {
+                path:'/home/personage',
+                component:Personage
             }
         ]
     }, {

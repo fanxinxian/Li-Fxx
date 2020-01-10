@@ -12,7 +12,9 @@
                         <span>欢迎</span>
                        </div>
                         <ul class="selectList">
-                            <li>个人中心</li>
+                            <li>
+                              <router-link to="/home/personage">个人中心</router-link>
+                            </li>
                             <li>我的班级</li>
                             <hr style="border:0.5px solid #e3e3e3;">
                             <li>设置</li>
@@ -159,7 +161,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .home{
     width: 100%;
     height: 100%;
@@ -171,7 +173,8 @@ export default {
     flex-direction: column；
 }
 .main{
-  flex: 1;
+  width: 100%;
+  height: 100%;
   overflow: auto;
 }
  .el-header {
