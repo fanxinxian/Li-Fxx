@@ -20,8 +20,9 @@ const rooms = {
                 commit("addCard", data.data)
             })
         },
-        deleteFn(state, grade_id){
-            axios.delete('/api/manger/grade/delete', {grade_id}).then(res=>{
+        deleteFn(state, room_id){
+            console.log(room_id, 'room_id')
+            axios.delete('/api/manger/room/delete', {room_id}).then(res=>{
                 if(res.data.code === 1){
                     Message({
                         message:res.data.msg,

@@ -48,11 +48,12 @@
                         <span style="color:#00f;font-size:14px">{{item.user_name}}发布</span>
                     </div>
                 <div class="li-right">
-                    <a href="">编辑</a>
+                    <!-- <a href="">编辑</a> -->
                 </div>
             </li>
         </ul>
     </div>
+    <div><img src="/1.png" alt="" class="img"></div>
 </el-container>
     </div>
 </template>
@@ -60,14 +61,14 @@
 import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
     props:{
-
+        
     },
     components:{
 
     },
     data(){
         return {
-            index:0,
+            index:-1,
             datalist:[],
             All:'',
             fullscreenLoading: false,
@@ -111,13 +112,19 @@ export default {
             });
             setTimeout(() => {
                 loading.close();
-            }, 1000);
+            }, 1200);
             setTimeout(()=>{
-                let arr = this.newArr.filter(item=>item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
-                this.datalist = arr
                 if(this.tab !== "All"){
                     let arrnew = this.newArr.filter(item=>item.subject_text.includes(this.tab) && item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
                     console.log(arrnew, this.newArr)
+                    if(arrnew.length){
+                        let arr = this.newArr.filter(item=>item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
+                        this.datalist = arr
+                    }else{
+                        <div>
+                            <img src="/1.png" alt="" class="img"/>
+                        </div>
+                    }
                     this.datalist = arrnew
                 }
                 this.formInline.user = '', 
@@ -190,14 +197,7 @@ export default {
      color: #fff;
      border-radius: 5px;
 }
-// .all{
-//     cursor: pointer;
-//     width:50px;
-//     height: 30px;
-//      background: #00f;
-//      color: #fff;
-//      border-radius: 5px;
-// }
+
 .main-bottom{
     width: 100%;
     height: auto;
@@ -248,5 +248,9 @@ export default {
         text-decoration: none;
         color: #00f;
     }
+}
+.img{
+    margin-left: 350px;
+    border-radius: 10px;
 }
 </style>
