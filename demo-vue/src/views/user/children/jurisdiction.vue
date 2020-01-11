@@ -6,12 +6,12 @@
             <el-table-column
                 prop="identity_text"
                 label="身份名称"
-                width="180">
+                width="280">
             </el-table-column>
             <el-table-column
                 prop="api_authority_text"
                 label="api权限名称"
-                width="180">
+                width="280">
             </el-table-column>
             <el-table-column
                 prop="api_authority_url"

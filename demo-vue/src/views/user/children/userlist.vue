@@ -6,12 +6,12 @@
             <el-table-column
                 prop="user_name"
                 label="用户名"
-                width="180">
+                width="280">
             </el-table-column>
             <el-table-column
                 prop="user_name"
                 label="密码"
-                width="180">
+                width="280">
             </el-table-column>
             <el-table-column
                 prop="identity_text"
