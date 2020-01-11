@@ -9,7 +9,7 @@
                     <div class="user" >
                        <div class="span">
                          <span class="photo"></span>
-                        <span>欢迎w916peach</span>
+                        <span>欢迎 w916peach</span>
                        </div>
                         <ul class="selectList">
                               <router-link to="/home/personage">
@@ -204,25 +204,22 @@ export default {
         height: 60px;
         display: flex;
         .user{
-            width: 120px;
+            width: 200px;
             height: 60px;
             margin: 0 auto;
-            display: flex;
             .span{
                 width: 320px;
                 height: 60px;
                 display: flex;
-                justify-content: space-around;
+                justify-content:center;
                 align-items: center;
                 .photo{
                   width: 32px;
                   height: 32px;
                   border-radius: 50%;
                   background: #ccc;
+                  margin-right: 5px;
                 }
-            }
-            .span:hover{
-              background: #eee;
             }
             
         }
@@ -235,7 +232,7 @@ export default {
             background: #fff;
             position: fixed;
             top: 60px;
-            right:12%;
+            right:8%;
             font-size: 12px;
             border-radius: 5px;
             display: flex;
