@@ -20,55 +20,6 @@
                 <el-button type="primary" @click="onSubmit(formInline)" icon="el-icon-search">查询</el-button>
             </el-form-item>
         </el-form>
-<<<<<<< HEAD
-    </el-main>
-        <div class="main-bottom">
-            <div class="main-bottom-top">
-                <h2>试卷列表</h2>
-            </div>
-        <el-table
-            :data="cardArr"
-            style="width: 100%">
-            <el-table-column
-                prop="title"
-                label="试卷信息"
-                width="180">
-            </el-table-column>
-            <el-table-column
-                prop="grade_name"
-                label="班级"
-                width="180">
-            </el-table-column>
-            <el-table-column
-                prop="user_name"
-                label="创建人">
-            </el-table-column>
-            <el-table-column
-                prop="start_time"
-                label="开始时间">
-            </el-table-column>
-            <el-table-column
-                prop="end_time"
-                label="结束时间">
-            </el-table-column>
-            <el-table-column
-                fixed="right"
-                label="操作"
-                width="120">
-            <template slot-scope="scope">
-            <el-button
-                @click.native.prevent="deleteRow(scope.$index, tableData)"
-                type="text"
-                size="small">
-                详情
-            </el-button>
-        </template>
-        </el-table-column>
-            </el-table>
-        </div>
-    </el-container>
-</div>
-=======
 </el-main>
     <div class="main-bottom">
         <div class="main-bottom-top">
@@ -117,7 +68,6 @@
     
 </el-container>
     </div>
->>>>>>> lj
 </template>
 <script>
 import {mapState, mapActions, mapMutations} from 'vuex'
