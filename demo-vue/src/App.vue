@@ -15,6 +15,9 @@ html,body,#app{
   padding: 0;
   list-style: none;
   box-sizing: border-box;
-  text-decoration: none;
+  a{
+    text-decoration: none;
+    color: #000;
+  }
 }
 </style>

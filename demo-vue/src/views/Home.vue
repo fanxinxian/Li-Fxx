@@ -12,12 +12,16 @@
                         <span>欢迎</span>
                        </div>
                         <ul class="selectList">
-                            <li>
-                              <router-link to="/home/personage">个人中心</router-link>
-                            </li>
-                            <li>我的班级</li>
+                              <router-link to="/home/personage">
+                                <li>个人中心</li>
+                              </router-link>
+                            <router-link to="/home/class">
+                              <li>我的班级</li>
+                            </router-link>
                             <hr style="border:0.5px solid #e3e3e3;">
-                            <li>设置</li>
+                            <router-link to="/home/set">
+                              <li>设置</li>
+                            </router-link>
                             <li @click="bank">退出登录</li>
                         </ul>
                     </div>
@@ -187,6 +191,8 @@ export default {
         width: 70%;
         height: 60px;
         line-height:90px;
+        display: flex;
+        align-items: center;
         img{
           width: 120px;
           height: 30px;

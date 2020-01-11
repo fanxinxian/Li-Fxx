@@ -112,7 +112,7 @@ export default {
     }
 }
 </script>
-<style scoped lang="scss">
+<style  lang="scss">
  .el-header{
     background: #EAEEF3;
     text-align: center;

@@ -29,7 +29,10 @@ import Prot from '../views/user/children/port'
 import Correct  from '../components/correct '
 //个人中心
 import Personage from '../components/personage.vue'
-
+//班级
+import Class from '../components/class.vue'
+//设置
+import Set from '../components/set.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -105,6 +108,12 @@ const routes = [
             }, {
                 path:'/home/personage',
                 component:Personage
+            }, {
+                path:'/home/class',
+                component:Class
+            }, {
+                path:'/home/set',
+                component:Set
             }
         ]
     }, {
