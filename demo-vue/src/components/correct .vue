@@ -62,16 +62,18 @@
     </el-table-column>
   </el-table>
         </div>
+        <Knockout :pagesize="pagesize" :cardArr="cardArr" :currentPage="currentPage" @Change="Change"/>
     </div>
 </template>
 <script>
 import {mapState, mapActions} from 'vuex'
+import Knockout from './knockout '
 export default {
     props:{
 
     },
     components:{
-
+        Knockout
     },
     data(){
         return {
@@ -85,6 +87,8 @@ export default {
                 resource: '',
                 desc: ''
             },
+            currentPage:1,
+            pagesize:7,
             id:'',
             formLabelWidth: '120px'
         }
@@ -93,6 +97,9 @@ export default {
         ...mapState('Grade', ['cardArr', 'row'])
     },
     methods:{
+        Change(val){
+            this.currentPage = val;
+        },
         ...mapActions('Grade', ['currect']),
         handleEdit(){
 
