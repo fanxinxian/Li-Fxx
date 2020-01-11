@@ -5,30 +5,28 @@
         <h2>试卷列表</h2>
     </el-header>
     <el-main class="maintop">
-        <div class="maintop-2">
-            <el-form :inline="true" :model="formInline" class="demo-form-inline">
+            <el-form :inline="true" :model="form" class="demo-form-inline">
             <el-form-item label="考试类型:">
-                <el-select v-model="formInline.region">
-                <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.exam_name"  value="exam_name"></el-option>
+                <el-select v-model="text">
+                <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.exam_name"  :value="item.exam_name"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="课程:">
-                <el-select v-model="formInline.region">
-                <el-option v-for="(item,ind) in cardArr" :key="ind" :label="item.questions_type_text"  value="questions_type_text"></el-option>
+                <el-select v-model="name">
+                <el-option v-for="(item,ind) in cardArr" :key="ind" :label="item.subject_text"  :value="item.subject_text"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
+                <el-button type="primary" @click="onSubmit" icon="el-icon-search" style="background:#00f">查询</el-button>
             </el-form-item>
 </el-form>
-        </div>
     </el-main>
     <div class="main-bottom">
         <div class="main-bottom-top">
             <h2>试卷列表</h2>
         </div>
     <el-table
-        :data="tableData"
+        :data="cardArr"
         style="width: 100%">
         <el-table-column
             prop="title"
@@ -81,16 +79,24 @@ export default {
     
     data(){
         return {
-            formInline: {
-                user: '',
-                region: ''
-            },
-            tableData:[]
+            text:'',
+            name:'',
+            form:{
+                text:'',
+                name:'', 
+                title:'',
+                grade_name:'',
+                user_name:'',
+                start_time:'',
+                end_time:'',
+            }
         };
     },
     computed:{
         ...mapState('List', [
-            'cardArr'
+            'cardArr',
+            'findCourseArr',
+            'typeArr'
         ])
     },
     methods:{
@@ -98,11 +104,14 @@ export default {
             console.log(row);
         },
         ...mapActions('List', [
-            'addCardFun'
+            'addCardFun',
+            'findCourseFun',
+            'typeFun'
         ]),
         onSubmit() {
             console.log('submit!');
         },
+        //详情
         deleteRow(index, rows) {
             rows.splice(index, 1);
         }
@@ -129,9 +138,6 @@ export default {
     background-color: #fff;
     color: #333;
     border-radius: 10px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
     height: 120px;
   }
 

@@ -40,7 +40,7 @@ const card = {
             })
         }, 
         currect({commit, state}){
-            axios.get('/api/exam/student', {params:{grade_id:state.row.grade_name}}).then(res=>{
+            axios.get('/api/exam/student', {grade_id:state.row.grade_name}).then(res=>{
                 // console.log(res);
                 commit('set_currect', res.data.exam)
             })

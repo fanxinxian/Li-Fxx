@@ -5,21 +5,31 @@ const lists = {
      */
     namespaced: true,
     state: {
-        cardArr: []
+        cardArr: [],
+        findCourseArr: [],
+        typeArr:[]
     },
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
-            console.log(state.cardArr);
         }
     },
     actions: {
         addCardFun({commit}){
-            axios.get('/api/exam/exam').then(res=>{
-                console.log(res);
-                commit("addCard", res.data.exam)
+            axios.get('/api/exam/exam').then(({data})=>{
+                commit("addCard", data.data)
             })
-        }
+        },
+        // findCourseFun({commit}){
+        //     axios.get('/api/exam/subject',{subject_text}).then(({data})=>{
+        //         console.log(data);
+        //     })
+        // },
+        // typeFun({commit}){
+        //     axios.get('/api/exam/examType').then(res=>{
+        //         console.log(res)
+        //     })
+        // }
     }
 }
   
