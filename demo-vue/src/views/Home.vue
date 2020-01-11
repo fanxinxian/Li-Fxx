@@ -9,7 +9,7 @@
                     <div class="user" >
                        <div class="span">
                          <span class="photo"></span>
-                        <span>欢迎</span>
+                        <span>欢迎w916peach</span>
                        </div>
                         <ul class="selectList">
                               <router-link to="/home/personage">
