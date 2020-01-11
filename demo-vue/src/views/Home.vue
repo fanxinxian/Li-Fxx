@@ -1,34 +1,6 @@
 <template>
   <div class="home">
     <el-container class="container">
-<<<<<<< HEAD
-            <el-header class="header">
-                <div class="el-left">
-                    <img src="../../public/timg.jpeg" alt="">
-                </div>
-                <div class="el-right">
-                    <div class="user" >
-                       <div class="span">
-                         <span class="photo"></span>
-                        <span>欢迎 w916peach</span>
-                       </div>
-                        <ul class="selectList">
-                              <router-link to="/home/personage">
-                                <li>个人中心</li>
-                              </router-link>
-                            <router-link to="/home/class">
-                                <li>我的班级</li>
-                            </router-link>
-                            <hr style="border:0.5px solid #e3e3e3;">
-                            <router-link to="/home/set">
-                              <li>设置</li>
-                            </router-link>
-                            <li @click="bank">退出登录</li>
-                        </ul>
-                    </div>
-                </div>
-            </el-header>
-=======
       <el-header class="header">
         <div class="el-left">
           <img src="../../public/timg.jpeg" alt />
@@ -55,7 +27,6 @@
           </div>
         </div>
       </el-header>
->>>>>>> fxx
       <el-container class="main">
         <el-aside width="200px">
           <el-menu default-active="1" class="el-menu-vertical-demo" background-color="#242A3F">
@@ -251,64 +222,8 @@ export default {
         }
       }
     }
-<<<<<<< HEAD
-    .el-right{
-        width: 30%;
-        height: 60px;
-        display: flex;
-        .user{
-            width: 200px;
-            height: 60px;
-            margin: 0 auto;
-            .span{
-                width: 320px;
-                height: 60px;
-                display: flex;
-                justify-content:center;
-                align-items: center;
-                .photo{
-                  width: 32px;
-                  height: 32px;
-                  border-radius: 50%;
-                  background: #ccc;
-                  margin-right: 5px;
-                }
-            }
-            
-        }
-        .user:hover .selectList{
-            display: block;
-        }
-        .selectList{
-            width: 120px;
-            height: 140px;
-            background: #fff;
-            position: fixed;
-            top: 60px;
-            right:8%;
-            font-size: 12px;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            display: none;
-            z-index: 999;
-            border: 0.5px solid #ccc;
-            li{
-                width: 100%;
-                height: 25%;
-                text-align: center;
-                line-height: 30px;
-                cursor: pointer;
-                z-index: 999;
-            }
-            li:hover{
-                background: rgba(182, 227, 244, 0.611);
-            }
-        }
-=======
     .user:hover .selectList {
       display: block;
->>>>>>> fxx
     }
     .selectList {
       width: 120px;
