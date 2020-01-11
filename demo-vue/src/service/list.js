@@ -5,19 +5,57 @@ const lists = {
      */
     namespaced: true,
     state: {
-        cardArr: []
+        cardArr: [],
+        TypeList:[],
+        TimeList:[],
+        formInline: {
+            user: '',
+            region: ''
+        },
     },
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
             console.log(state.cardArr);
+        },
+        set_textList(state, obj){
+            state.TypeList = obj;
+            // console.log(state.TypeList);
+        },
+        set_testTime(state, obj){
+            state.TimeList = obj;
+        },
+        onSubmit(state, {user, region}){
+            if(user){
+                state.cardArr = state.cardArr.filter(item=>item.subject_text === user);
+                console.log('2', state.cardArr);
+            }else if(region){
+                state.cardArr = state.cardArr.filter(item=>item.exam_name === region);
+                console.log('3', state.cardArr);
+            }else if(user, region){
+                state.cardArr = state.cardArr.filter(item=>item.subject_text === user && item.exam_name === region);
+                console.log('1', state.cardArr);
+            }
+            state.formInline = {
+                user: '',
+                region: ''
+            }
         }
     },
     actions: {
         addCardFun({commit}){
             axios.get('/api/exam/exam').then(res=>{
-                console.log(res);
                 commit("addCard", res.data.exam)
+            })
+        },
+        textList({commit}){
+            axios.get('/api/exam/subject').then(res=>{
+                commit('set_textList', res.data.data);
+            })
+        },
+        testTime({commit}){
+            axios.get('/api/exam/examType').then(({data})=>{
+                commit("set_testTime", data.data)
             })
         }
     }

@@ -9,18 +9,18 @@
             <el-form :inline="true" :model="formInline" class="demo-form-inline">
             <el-form-item label="考试类型:">
                 <el-select v-model="formInline.region">
-                <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.exam_name"  value="exam_name"></el-option>
+                <el-option  v-for="(item,ind) in TimeList" :key="ind" :label="item.exam_name"  :value="item.exam_name"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="课程:">
-                <el-select v-model="formInline.region">
-                <el-option v-for="(item,ind) in cardArr" :key="ind" :label="item.questions_type_text"  value="questions_type_text"></el-option>
+                <el-select v-model="formInline.user">
+                <el-option v-for="(item,ind) in TypeList" :key="ind" :label="item.subject_text"  :value="item.subject_text"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
+                <el-button type="primary" @click="onSubmit(formInline)" icon="el-icon-search">查询</el-button>
             </el-form-item>
-</el-form>
+        </el-form>
         </div>
     </el-main>
     <div class="main-bottom">
@@ -28,7 +28,7 @@
             <h2>试卷列表</h2>
         </div>
     <el-table
-        :data="tableData"
+        :data="cardArr"
         style="width: 100%">
         <el-table-column
             prop="title"
@@ -71,7 +71,7 @@
     </div>
 </template>
 <script>
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
     props:{
     },
@@ -81,34 +81,35 @@ export default {
     
     data(){
         return {
-            formInline: {
-                user: '',
-                region: ''
-            },
             tableData:[]
         };
     },
     computed:{
         ...mapState('List', [
-            'cardArr'
+            'cardArr', 
+            'TypeList', 
+            'TimeList',
+            'formInline'
         ])
     },
     methods:{
+        ...mapMutations('List', ['onSubmit']),
         handleClick(row) {
             console.log(row);
         },
         ...mapActions('List', [
-            'addCardFun'
+            'addCardFun', 
+            'textList', 
+            'testTime'
         ]),
-        onSubmit() {
-            console.log('submit!');
-        },
         deleteRow(index, rows) {
             rows.splice(index, 1);
         }
     },
     created(){
         this.addCardFun();
+        this.textList();
+        this.testTime();
     },
     mounted(){
 
