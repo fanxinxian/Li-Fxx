@@ -8,10 +8,11 @@
         <div class="maintop-1">
   <ul class="ul">
       <span style="font-size:14px">课程类型:</span>
-      <span style="font-size:12px;margin:0 -30px 0 20px" class="all" @click="all">All</span>
       <div class="li">
-          <li v-for="(item,index) in cardArr" :key="index">
-          {{item.subject_text}}
+          <li @click="all" class="all">All</li>
+          <li v-for="(item,idx) in cardArr" :key="idx"
+          :class="idx==index?'active':''" @click="son(item,idx)">
+          <span>{{item.subject_text}}</span>
       </li>
       </div>
   </ul>
@@ -19,24 +20,24 @@
         <div class="maintop-2">
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
             <el-form-item label="考试类型:">
-                <el-select v-model="formInline.region">
-                <el-option  v-for="(item,ind) in examArr" :key="ind" :label="item.exam_name"  value="exam_name"></el-option>
+                <el-select v-model="formInline.user">
+                <el-option  v-for="(item,ind) in examArr" :key="ind" :label="item.exam_name"  :value="item.exam_name"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="题目类型">
                 <el-select v-model="formInline.region">
-                <el-option v-for="(item,ind) in questArr" :key="ind" :label="item.questions_type_text"  value="questions_type_text"></el-option>
+                <el-option v-for="(item,ind) in questArr" :key="ind" :label="item.questions_type_text" :value="item.questions_type_text"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit" icon="el-icon-search" style="background:#00f;">查询</el-button>
+                 <el-button type="primary" @click="onSubmit(formInline)" icon="el-icon-search" style="background:#00f;">查询</el-button>
             </el-form-item>
 </el-form>
         </div>
     </el-main>
     <div class="main-bottom">
         <ul>
-            <li  v-for="(item,index) in newArr" :key="index">
+            <li  v-for="(item,index) in datalist" :key="index">
                     <div class="li-left">
                         <span type="success">{{item.title}}</span>
                         <div class="tag">
@@ -56,7 +57,7 @@
     </div>
 </template>
 <script>
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
     props:{
 
@@ -66,11 +67,15 @@ export default {
     },
     data(){
         return {
+            index:0,
+            datalist:[],
+            All:'',
+            fullscreenLoading: false,
             formInline: {
                 user: '',
                 region: ''
             },
-            tableData:[]
+            tab:'All'
         };
     },
     computed:{
@@ -82,6 +87,11 @@ export default {
         ])
     },
     methods:{
+        son(item, idx = 0){
+            this.index = idx;
+            console.log(item.subject_text)
+            this.tab = item.subject_text;
+        },
         handleClick(row) {
             console.log(row);
         },
@@ -91,14 +101,31 @@ export default {
             'QuestionsFun',
             'newyyFun'
         ]),
+        ...mapMutations('Look', ['onSubmit']),
         onSubmit() {
-            console.log('submit!');
-        },
-        deleteRow(index, rows) {
-            rows.splice(index, 1);
+            const loading = this.$loading({
+                lock: true,
+                text: '查询中,请稍后',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            });
+            setTimeout(() => {
+                loading.close();
+            }, 1000);
+            setTimeout(()=>{
+                let arr = this.newArr.filter(item=>item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
+                this.datalist = arr
+                if(this.tab !== "All"){
+                    let arrnew = this.newArr.filter(item=>item.subject_text.includes(this.tab) && item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
+                    console.log(arrnew, this.newArr)
+                    this.datalist = arrnew
+                }
+                this.formInline.user = '', 
+                this.formInline.region = ''
+            }, 1000)
         },
         all(){
-            this.nextSbiling.style.background = '#00f'
+            console.log('all')
         }
     },
     created(){
@@ -106,6 +133,7 @@ export default {
         this.examTypeFun(),
         this.QuestionsFun(),
         this.newyyFun()
+        this.datalist = this.newArr
     },
     mounted(){
 
@@ -148,11 +176,28 @@ export default {
         align-items: center;
         font-size: 12px;
         cursor: pointer;
+        span{
+            width:100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            display: block;
+        }
     }
 }
-.all{
-    cursor: pointer;
+.active{
+     background: #00f;
+     color: #fff;
+     border-radius: 5px;
 }
+// .all{
+//     cursor: pointer;
+//     width:50px;
+//     height: 30px;
+//      background: #00f;
+//      color: #fff;
+//      border-radius: 5px;
+// }
 .main-bottom{
     width: 100%;
     height: auto;

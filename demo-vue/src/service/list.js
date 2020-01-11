@@ -6,16 +6,22 @@ const lists = {
     namespaced: true,
     state: {
         cardArr: [],
+<<<<<<< HEAD
         TypeList:[],
         TimeList:[],
         formInline: {
             user: '',
             region: ''
         },
+=======
+        findCourseArr: [],
+        typeArr:[]
+>>>>>>> lj
     },
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
+<<<<<<< HEAD
             console.log(state.cardArr);
         },
         set_textList(state, obj){
@@ -40,10 +46,13 @@ const lists = {
                 user: '',
                 region: ''
             }
+=======
+>>>>>>> lj
         }
     },
     actions: {
         addCardFun({commit}){
+<<<<<<< HEAD
             axios.get('/api/exam/exam').then(res=>{
                 commit("addCard", res.data.exam)
             })
@@ -58,6 +67,22 @@ const lists = {
                 commit("set_testTime", data.data)
             })
         }
+=======
+            axios.get('/api/exam/exam').then(({data})=>{
+                commit("addCard", data.data)
+            })
+        },
+        // findCourseFun({commit}){
+        //     axios.get('/api/exam/subject',{subject_text}).then(({data})=>{
+        //         console.log(data);
+        //     })
+        // },
+        // typeFun({commit}){
+        //     axios.get('/api/exam/examType').then(res=>{
+        //         console.log(res)
+        //     })
+        // }
+>>>>>>> lj
     }
 }
   

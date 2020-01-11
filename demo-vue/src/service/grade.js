@@ -54,6 +54,10 @@ const card = {
         }, 
         currect({commit, state}){
             axios.get('/api/exam/student', {grade_id:state.row.grade_name}).then(res=>{
+<<<<<<< HEAD
+=======
+                // console.log(res);
+>>>>>>> lj
                 commit('set_currect', res.data.exam)
             })
         },

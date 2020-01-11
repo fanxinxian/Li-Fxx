@@ -24,6 +24,7 @@ const rooms = {
             state.newArr = obj
         }
     },
+
     actions: {
         addCardFun({commit}){//
             axios.get('/api/exam/subject').then(({data})=>{

@@ -5,9 +5,9 @@
         <h2>试卷列表</h2>
     </el-header>
     <el-main class="maintop">
-        <div class="maintop-2">
-            <el-form :inline="true" :model="formInline" class="demo-form-inline">
+            <el-form :inline="true" :model="form" class="demo-form-inline">
             <el-form-item label="考试类型:">
+<<<<<<< HEAD
                 <el-select v-model="formInline.region">
                 <el-option  v-for="(item,ind) in TimeList" :key="ind" :label="item.exam_name"  :value="item.exam_name"></el-option>
                 </el-select>
@@ -22,6 +22,21 @@
             </el-form-item>
         </el-form>
         </div>
+=======
+                <el-select v-model="text">
+                <el-option  v-for="(item,ind) in cardArr" :key="ind" :label="item.exam_name"  :value="item.exam_name"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="课程:">
+                <el-select v-model="name">
+                <el-option v-for="(item,ind) in cardArr" :key="ind" :label="item.subject_text"  :value="item.subject_text"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit" icon="el-icon-search" style="background:#00f">查询</el-button>
+            </el-form-item>
+</el-form>
+>>>>>>> lj
     </el-main>
     <div class="main-bottom">
         <div class="main-bottom-top">
@@ -81,15 +96,35 @@ export default {
     
     data(){
         return {
+<<<<<<< HEAD
             tableData:[]
+=======
+            text:'',
+            name:'',
+            form:{
+                text:'',
+                name:'', 
+                title:'',
+                grade_name:'',
+                user_name:'',
+                start_time:'',
+                end_time:'',
+            }
+>>>>>>> lj
         };
     },
     computed:{
         ...mapState('List', [
+<<<<<<< HEAD
             'cardArr', 
             'TypeList', 
             'TimeList',
             'formInline'
+=======
+            'cardArr',
+            'findCourseArr',
+            'typeArr'
+>>>>>>> lj
         ])
     },
     methods:{
@@ -98,10 +133,21 @@ export default {
             console.log(row);
         },
         ...mapActions('List', [
+<<<<<<< HEAD
             'addCardFun', 
             'textList', 
             'testTime'
         ]),
+=======
+            'addCardFun',
+            'findCourseFun',
+            'typeFun'
+        ]),
+        onSubmit() {
+            console.log('submit!');
+        },
+        //详情
+>>>>>>> lj
         deleteRow(index, rows) {
             rows.splice(index, 1);
         }
@@ -130,9 +176,6 @@ export default {
     background-color: #fff;
     color: #333;
     border-radius: 10px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
     height: 120px;
   }
 
