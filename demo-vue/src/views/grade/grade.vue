@@ -5,6 +5,7 @@
         <h2>班级管理</h2>
     </el-header>
     <el-main class="elmain">
+
     <el-button type="primary" icon="el-icon-plus" 
       @click="dialogFormVisible = true;">添加班级</el-button>
 <el-dialog title="添加班级" :visible.sync="dialogFormVisible">
@@ -26,7 +27,7 @@
   </el-form>
   <div slot="footer" class="dialog-footer">
     <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="sure">确 定</el-button>
+        <el-button type="primary" @click="openFullScreen2"> 确 定 </el-button>
   </div>
 </el-dialog>
         <el-table
@@ -53,7 +54,6 @@
       width="230">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">修改</el-button>
-        <!-- |<el-button type="text" size="small" @click="del">删除</el-button> -->
         <el-button @click="del(scope.row)" type="text" size="small">删除</el-button>
       </template>
     </el-table-column>
@@ -84,6 +84,7 @@ export default {
     },
     data(){
         return {
+            fullscreenLoading: false,
             gridData: [],
             grade:'',
             room:'',
@@ -123,12 +124,6 @@ export default {
             'addGradeFun',
             'deleteFun',
         ]),
-        sure(){//确定按钮
-            let {grade, room, subject} = this;
-            this.addGradeFun({grade, room, subject});
-            this.dialogFormVisible = false;
-            this.addCardFun()
-        },
         del(row){
             this.id = row.grade_id
             this.dialogVisible = true;
@@ -138,6 +133,24 @@ export default {
             this.dialogVisible = false;
             this.addCardFun();
         },
+        openFullScreen2() {//确定按钮
+            let {grade, room, subject} = this;
+            this.addGradeFun({grade, room, subject});
+            this.addCardFun();
+            this.grade = '',
+            this.room = '',
+            this.subject = ''
+            this.dialogFormVisible = false;
+            const loading = this.$loading({
+                lock: true,
+                text: '班级添加中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            });
+            setTimeout(() => {
+                loading.close();
+            }, 1500);
+        }
     },
     created(){
         this.addCardFun()
