@@ -90,11 +90,9 @@ export default {
     methods:{
         son(item, idx = 0){
             this.index = idx;
-            console.log(item.subject_text)
             this.tab = item.subject_text;
         },
-        handleClick(row) {
-            console.log(row);
+        handleClick() {
         },
         ...mapActions('Look', [
             'addCardFun',
@@ -116,7 +114,6 @@ export default {
             setTimeout(()=>{
                 if(this.tab !== "All"){
                     let arrnew = this.newArr.filter(item=>item.subject_text.includes(this.tab) && item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
-                    console.log(arrnew, this.newArr)
                     if(arrnew.length){
                         let arr = this.newArr.filter(item=>item.exam_name.includes(this.formInline.user) && item.questions_type_text.includes(this.formInline.region))
                         this.datalist = arr
@@ -132,7 +129,6 @@ export default {
             }, 1000)
         },
         all(){
-            console.log('all')
         }
     },
     created(){
