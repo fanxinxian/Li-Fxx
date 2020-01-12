@@ -23,7 +23,7 @@
     <el-table-column
       prop="room_text"
       label="教室号"
-      width="640">
+      width="740">
     </el-table-column>
 
     <el-table-column
@@ -97,7 +97,6 @@ export default {
             this.dialogVisible = false;
         },
         handleClick(row) {
-            console.log(row)
             this.id = row.room_id
             this.dialogVisible = true;
         },

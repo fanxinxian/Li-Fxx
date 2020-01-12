@@ -14,9 +14,7 @@ const Login = {
     },
     actions: {
         getList(state, {name, pass}){
-            console.log( {name, pass})
             axios.post('/api/user/login', {user_name:name, user_pwd:pass }).then(res =>{
-                console.log(res);
                 if(res.data.code === 1){
                     Message({
                         message:res.data.msg,

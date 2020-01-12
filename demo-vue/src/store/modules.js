@@ -9,6 +9,7 @@ import Look from '../service/look'
 import List from '../service/list'
 import Addexam from '../service/addexam'
 import UserList from '../service/user'
+import Adduser from '../service/adduser'
 Vue.use(Vuex);
 //构造store
 const store = new Vuex.Store({
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
         Look,
         List,
         Addexam,
-        UserList
+        UserList,
+        Adduser
     }
 })
 

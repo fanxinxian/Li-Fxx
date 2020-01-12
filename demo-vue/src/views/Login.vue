@@ -69,12 +69,10 @@ export default {
         ...mapActions('Login', ['getList']), 
         submitForm(formName) {
             let {name, pass} = this.ruleForm;
-            console.log(name, pass);
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     this.getList({name, pass});
                 } else {
-                    console.log('error submit!!');
                     return false;
                 }
             });

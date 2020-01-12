@@ -67,8 +67,7 @@ export default {
         ])
     },
     methods:{
-        handleChange(value) {
-            console.log(value);
+        handleChange() {
         },
         ...mapActions('Addexam', [
             'addCardFun', 'testTime', 'addtestFn'

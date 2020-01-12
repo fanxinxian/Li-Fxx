@@ -32,7 +32,6 @@ const card = {
         },
         addGradeFun( state, {grade, room, subject}){//添加班级
             axios.post('/api/manger/grade', {grade_name:grade, room_id:room, subject_id:subject}).then(({data})=>{
-                console.log(data);
             })
         },
         updataList(state, {roid, name, subname, roomid}){
@@ -53,8 +52,13 @@ const card = {
                 }
             })
         },
+<<<<<<< HEAD
         deleteFun( state, grade_id){//删除班级
             axios.delete('/api/manger/grade/delete', {grade_id}).then(res=>{
+=======
+        updataList(){
+            axios.PUT('/api/manger/grade/update', {}).then(res=>{
+>>>>>>> 29782cf8fa0528ab3dc466ea3d81664c10916461
                 if(res.data.code === 1){
                     Message({
                         message: res.data.msg,
