@@ -22,7 +22,6 @@ const student = {
             state.sum = Math.ceil(state.cardArr.length / state.emit);0
         },
         btnSecah(state, data){
-            console.log(data);
             if(data.region && data.grade_name){
                 state.cardArr = state.cardArr.filter(item=>item.student_name === data.grade_name && item.room_text === data.region);
             }else if(data.names){

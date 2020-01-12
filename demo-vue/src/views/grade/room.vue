@@ -97,7 +97,6 @@ export default {
             this.dialogVisible = false;
         },
         handleClick(row) {
-            console.log(row)
             this.id = row.room_id
             this.dialogVisible = true;
         },

@@ -72,8 +72,7 @@ export default {
         ])
     },
     methods:{
-        handleClick(row) {
-            console.log(row);
+        handleClick() {
         },
         ...mapActions('Classify', [
             'addCardFun',
@@ -83,7 +82,6 @@ export default {
         ]),
         sure(){
             this.addQuestionsFun(this.text, this.sort)
-            console.log(this.text)
             this.text = '';
             // this.addCardFun()
             this.dialogFormVisible = false;

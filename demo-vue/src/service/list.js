@@ -16,11 +16,9 @@ const lists = {
     mutations: {
         addCard(state, obj){
             state.cardArr = obj;
-            console.log(state.cardArr);
         },
         set_textList(state, obj){
             state.TypeList = obj;
-            // console.log(state.TypeList);
         },
         set_testTime(state, obj){
             state.TimeList = obj;
@@ -28,13 +26,10 @@ const lists = {
         onSubmit(state, {user, region}){
             if(user){
                 state.cardArr = state.cardArr.filter(item=>item.subject_text === user);
-                console.log('2', state.cardArr);
             }else if(region){
                 state.cardArr = state.cardArr.filter(item=>item.exam_name === region);
-                console.log('3', state.cardArr);
             }else if(user, region){
                 state.cardArr = state.cardArr.filter(item=>item.subject_text === user && item.exam_name === region);
-                console.log('1', state.cardArr);
             }
             state.formInline = {
                 user: '',
