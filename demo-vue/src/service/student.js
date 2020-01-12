@@ -40,6 +40,7 @@ const student = {
         getList({commit}){
             axios.get('/api/manger/student').then(({data}) => {
                 commit('setList', data.data);
+                console.log(data. data)
             })
         }
     }

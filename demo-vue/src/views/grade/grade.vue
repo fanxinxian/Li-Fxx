@@ -7,8 +7,8 @@
     <el-main class="elmain">
 
     <el-button type="primary" icon="el-icon-plus" 
-      @click="dialogFormVisible = true;">添加班级</el-button>
-<el-dialog title="添加班级" :visible.sync="dialogFormVisible">
+      @click="addclass">添加班级</el-button>
+<el-dialog :title="flag===true?'添加班级':'修改班级'" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="班级名" :label-width="formLabelWidth">
       <el-input autocomplete="off" v-model="grade" placeholder="班级名"></el-input>
@@ -27,7 +27,7 @@
   </el-form>
   <div slot="footer" class="dialog-footer">
     <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="openFullScreen2"> 确 定 </el-button>
+        <el-button type="primary" @click="openFullScreen2(form)"> 确 定 </el-button>
   </div>
 </el-dialog>
         <el-table
@@ -53,7 +53,7 @@
       label="操作"
       width="230">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">修改</el-button>
+        <el-button @click="handleClick(scope.$index, scope.row)" type="text" size="small">修改</el-button>
         <el-button @click="del(scope.row)" type="text" size="small">删除</el-button>
       </template>
     </el-table-column>
@@ -89,9 +89,13 @@ export default {
             grade:'',
             room:'',
             subject:'',
+            flag:false,
             dialogTableVisible: false,
             dialogFormVisible: false,
             form: {
+                grade:'',
+                room:'',
+                subject:'',
                 name: '',
                 region: '',
                 date1: '',
@@ -104,6 +108,10 @@ export default {
             formLabelWidth: '120px',
             dialogVisible:false,
             id:'',
+            roid:'',
+            name:'',
+            subname:'',
+            roomid:''
         };
     },
     computed:{
@@ -114,15 +122,29 @@ export default {
         ])
     },
     methods:{
-        handleClick() {
-            // this.grade = row.grade_name;
+        //添加
+        addclass(){
             this.dialogFormVisible = true;
-            // this.updataList();
+            this.grade = '',
+            this.room = '',
+            this.subject = '';
+            this.flag = true;
+        },
+        //修改
+        handleClick(index, row) {
+            this.dialogFormVisible = true;
+            this.flag = false
+            this.grade = row.grade_name 
+            this.subject = row.subject_text
+            this.room = row.room_text 
+            this.roid = row.grade_id
+
         },
         ...mapActions('Grade', [
             'addCardFun',
             'addGradeFun',
             'deleteFun',
+            'updataList'
         ]),
         del(row){
             this.id = row.grade_id
@@ -133,17 +155,19 @@ export default {
             this.dialogVisible = false;
             this.addCardFun();
         },
-        openFullScreen2() {//确定按钮
-            let {grade, room, subject} = this;
-            this.addGradeFun({grade, room, subject});
-            this.addCardFun();
-            this.grade = '',
-            this.room = '',
-            this.subject = ''
+        //确定按钮
+        openFullScreen2() {
+            let {grade, room, subject, roid, name, subname, roomid} = this;
+            if(this.flag === true){
+                this.addGradeFun({grade, room, subject});
+                this.addCardFun();  
+            }else if(this.flag === false){
+                this.updataList({roid, name, subname, roomid})
+            }
             this.dialogFormVisible = false;
             const loading = this.$loading({
                 lock: true,
-                text: '班级添加中',
+                text: '修改中,请稍后',
                 spinner: 'el-icon-loading',
                 background: 'rgba(0, 0, 0, 0.7)'
             });
